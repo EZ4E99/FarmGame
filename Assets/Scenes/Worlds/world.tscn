@@ -293,7 +293,7 @@ shape = SubResource("ConcavePolygonShape3D_ot7nn")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 
 [node name="Table" parent="Environment" instance=ExtResource("9_tcd74")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13, 0.1, 2.5)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0.1, 0.8)
 
 [node name="Well" parent="Environment" instance=ExtResource("10_38b56")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.4, 0.2, -1.4)

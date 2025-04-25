@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhtnt8xartow7"]
+[gd_scene load_steps=15 format=3 uid="uid://bhtnt8xartow7"]
 
 [sub_resource type="Gradient" id="Gradient_08m46"]
 interpolation_mode = 1
@@ -40,11 +40,15 @@ bottom_radius = 0.05
 radial_segments = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6u3p"]
-albedo_color = Color(0.273873, 0.273873, 0.273873, 1)
+transparency = 1
+albedo_color = Color(0.537255, 0.894118, 0.968627, 0.392157)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u5c3p"]
 material = SubResource("StandardMaterial3D_q6u3p")
 size = Vector3(4.1, 0.05, 3.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_08m46"]
+data = PackedVector3Array(-2.05, 0.025, 1.75, 2.05, 0.025, 1.75, -2.05, -0.025, 1.75, 2.05, 0.025, 1.75, 2.05, -0.025, 1.75, -2.05, -0.025, 1.75, 2.05, 0.025, -1.75, -2.05, 0.025, -1.75, 2.05, -0.025, -1.75, -2.05, 0.025, -1.75, -2.05, -0.025, -1.75, 2.05, -0.025, -1.75, 2.05, 0.025, 1.75, 2.05, 0.025, -1.75, 2.05, -0.025, 1.75, 2.05, 0.025, -1.75, 2.05, -0.025, -1.75, 2.05, -0.025, 1.75, -2.05, 0.025, -1.75, -2.05, 0.025, 1.75, -2.05, -0.025, -1.75, -2.05, 0.025, 1.75, -2.05, -0.025, 1.75, -2.05, -0.025, -1.75, 2.05, 0.025, 1.75, -2.05, 0.025, 1.75, 2.05, 0.025, -1.75, -2.05, 0.025, 1.75, -2.05, 0.025, -1.75, 2.05, 0.025, -1.75, -2.05, -0.025, 1.75, 2.05, -0.025, 1.75, -2.05, -0.025, -1.75, 2.05, -0.025, 1.75, 2.05, -0.025, -1.75, -2.05, -0.025, -1.75)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jwp7a"]
 data = PackedVector3Array(-2, 0.8, 0.025, 2, 0.8, 0.025, -2, -0.8, 0.025, 2, 0.8, 0.025, 2, -0.8, 0.025, -2, -0.8, 0.025, 2, 0.8, -0.025, -2, 0.8, -0.025, 2, -0.8, -0.025, -2, 0.8, -0.025, -2, -0.8, -0.025, 2, -0.8, -0.025, 2, 0.8, 0.025, 2, 0.8, -0.025, 2, -0.8, 0.025, 2, 0.8, -0.025, 2, -0.8, -0.025, 2, -0.8, 0.025, -2, 0.8, -0.025, -2, 0.8, 0.025, -2, -0.8, -0.025, -2, 0.8, 0.025, -2, -0.8, 0.025, -2, -0.8, -0.025, 2, 0.8, 0.025, -2, 0.8, 0.025, 2, 0.8, -0.025, -2, 0.8, 0.025, -2, 0.8, -0.025, 2, 0.8, -0.025, -2, -0.8, 0.025, 2, -0.8, 0.025, -2, -0.8, -0.025, 2, -0.8, 0.025, 2, -0.8, -0.025, -2, -0.8, -0.025)
@@ -90,6 +94,10 @@ transform = Transform3D(1, 0, 0, 0, 0.991445, 0.130526, 0, -0.130526, 0.991445, 
 mesh = SubResource("BoxMesh_u5c3p")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.991445, 0.130526, 0, -0.130526, 0.991445, 0, 2.2, -1.5)
+shape = SubResource("ConcavePolygonShape3D_08m46")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -3)
