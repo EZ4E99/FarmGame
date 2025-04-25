@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6etrrwho1kb"]
+
+[ext_resource type="Script" uid="uid://ddqrdnhh5q14j" path="res://Assets/Scripts/Inventory/Item.cs" id="1_qamgd"]
+[ext_resource type="Texture2D" uid="uid://bco1jkt1q65vs" path="res://Assets/Textures/Bucket_JE2_BE2.png" id="2_v0tyu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ek3i"]
+size = Vector2(48, 48)
+
+[node name="Item_Bucket" type="Area2D"]
+script = ExtResource("1_qamgd")
+ItemName = "Bucket"
+Icon = ExtResource("2_v0tyu")
+IsStackable = true
+ItemType = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("2_v0tyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0ek3i")

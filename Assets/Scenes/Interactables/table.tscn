@@ -1,0 +1,290 @@
+[gd_scene load_steps=23 format=3 uid="uid://b6sgc5dcoh17b"]
+
+[ext_resource type="Texture2D" uid="uid://cekuovbrotn6p" path="res://Assets/Textures/Water_Bucket_JE2_BE2.png" id="1_hc52k"]
+[ext_resource type="Script" uid="uid://cqfkhsfefaiub" path="res://Assets/Scripts/Interactables/Table.cs" id="1_ypson"]
+[ext_resource type="Texture2D" uid="uid://crpr5ofrni6rk" path="res://Assets/Textures/207883.png" id="2_ypson"]
+[ext_resource type="Texture2D" uid="uid://bw5k0i7ewosos" path="res://Assets/Textures/9917.png" id="3_pg1bq"]
+[ext_resource type="Texture2D" uid="uid://d3gdhsdgcyc6y" path="res://Assets/Textures/Sugar_JE2_BE2.png" id="4_orn06"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2k7ty"]
+albedo_color = Color(0.435294, 0.215686, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_va08c"]
+material = SubResource("StandardMaterial3D_2k7ty")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.4
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ie65k"]
+albedo_color = Color(0.298039, 0.12549, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0i117"]
+material = SubResource("StandardMaterial3D_ie65k")
+size = Vector3(1, 0.05, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hc52k"]
+albedo_color = Color(0.592157, 0.352941, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ypson"]
+material = SubResource("StandardMaterial3D_hc52k")
+size = Vector3(0.6, 0.02, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pg1bq"]
+albedo_color = Color(0.592157, 0.352941, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_orn06"]
+material = SubResource("StandardMaterial3D_pg1bq")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.25
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dutux"]
+albedo_color = Color(0.592157, 0.352941, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_eys70"]
+material = SubResource("StandardMaterial3D_dutux")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.4
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypson"]
+albedo_color = Color(1, 1, 0.517647, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_82gun"]
+material = SubResource("StandardMaterial3D_ypson")
+radius = 0.1
+height = 0.1
+radial_segments = 16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hc52k"]
+size = Vector3(1.2, 0.8, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypson"]
+size = Vector3(2, 2, 1.6)
+
+[sub_resource type="Animation" id="Animation_ol8kj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/MeshInstance3D7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.35, 0.275, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/Node3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.8326, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meshes/MeshInstance3D7:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_idu82"]
+resource_name = "work"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/MeshInstance3D7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 2.5, 4, 4.8, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1.5, 1, 1), Vector3(1.5, 1, 1.5), Vector3(1, 1, 1), Vector3(0.1, 0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/Node3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.36667, 1.73333, 2.1, 2.5, 2.86667, 3.26667, 3.63333, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.35, 0.275, 0), Vector3(-0.05, 0.35, 0), Vector3(0.25, 0.35, 0), Vector3(-0.05, 0.35, 0), Vector3(0.25, 0.35, 0), Vector3(0.1, 0.35, -0.1), Vector3(0.075, 0.35, 0.129), Vector3(0.1, 0.35, -0.1), Vector3(0.075, 0.35, 0.129), Vector3(0.1, 0.35, -0.1), Vector3(-0.35, 0.275, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meshes/Node3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2.36667, 2.66667, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.8326, 0), Vector3(0, -1.5708, 0), Vector3(0, -1.5708, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, -1.8326, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meshes/MeshInstance3D7:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_14vp8"]
+_data = {
+&"RESET": SubResource("Animation_ol8kj"),
+&"work": SubResource("Animation_idu82")
+}
+
+[node name="Table" type="Area3D"]
+collision_mask = 7
+script = ExtResource("1_ypson")
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -0.2)
+mesh = SubResource("CylinderMesh_va08c")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, -0.2)
+mesh = SubResource("CylinderMesh_va08c")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0.2)
+mesh = SubResource("CylinderMesh_va08c")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0.2)
+mesh = SubResource("CylinderMesh_va08c")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_0i117")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.225, 0)
+mesh = SubResource("BoxMesh_ypson")
+
+[node name="Node3D" type="Node3D" parent="Meshes"]
+transform = Transform3D(-0.258823, 0, -0.965925, 0, 1, 0, 0.965925, 0, -0.258823, -0.35, 0.275, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Node3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_orn06")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes/Node3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_eys70")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.1, 0.27, 0)
+visible = false
+mesh = SubResource("SphereMesh_82gun")
+
+[node name="Items" type="Node3D" parent="."]
+
+[node name="Water" type="Sprite3D" parent="Items"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.3, 0.1)
+visible = false
+pixel_size = 0.003
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("1_hc52k")
+
+[node name="Yeast" type="Sprite3D" parent="Items"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45058e-09, 0.3, 0.1)
+visible = false
+pixel_size = 0.003
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("2_ypson")
+
+[node name="Flour" type="Sprite3D" parent="Items"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.3, -0.1)
+visible = false
+pixel_size = 0.003
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("3_pg1bq")
+
+[node name="Salt" type="Sprite3D" parent="Items"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45058e-09, 0.3, -0.1)
+visible = false
+pixel_size = 0.003
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("4_orn06")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 2.98023e-08)
+shape = SubResource("BoxShape3D_hc52k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5.96046e-08)
+shape = SubResource("BoxShape3D_ypson")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_14vp8")
+}
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 制作面团
+需要 面粉、水、酵母、盐"
+font_size = 36

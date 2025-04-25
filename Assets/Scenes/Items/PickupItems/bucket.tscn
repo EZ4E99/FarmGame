@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://by5lj6wyxjxuw"]
+
+[ext_resource type="Script" uid="uid://cb3pa4uebb6wk" path="res://Assets/Scripts/Interactables/ItemPickup.cs" id="1_gu25g"]
+[ext_resource type="Texture2D" uid="uid://bco1jkt1q65vs" path="res://Assets/Textures/Bucket_JE2_BE2.png" id="2_1oxeh"]
+[ext_resource type="PackedScene" uid="uid://c6etrrwho1kb" path="res://Assets/Scenes/Items/item_bucket.tscn" id="3_oj50b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyow2"]
+
+[node name="Bucket" type="Area3D" node_paths=PackedStringArray("_item")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_gu25g")
+_item = NodePath("Item_Bucket")
+_quantity = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+cast_shadow = 2
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 4
+texture = ExtResource("2_1oxeh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vyow2")
+
+[node name="Item_Bucket" parent="." instance=ExtResource("3_oj50b")]
+visible = false
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 拾取 水桶"
+font_size = 36

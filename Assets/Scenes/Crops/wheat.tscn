@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://gkaq0yx6w01r"]
+
+[ext_resource type="Script" uid="uid://c3hivy5yr2a7c" path="res://Assets/Scripts/Interactables/Crop.cs" id="1_sofyh"]
+[ext_resource type="Texture2D" uid="uid://tkvuxppsi0t2" path="res://Assets/Textures/Wheat/Stage1.png" id="2_bpco8"]
+[ext_resource type="Texture2D" uid="uid://qma4ne6sw1k1" path="res://Assets/Textures/Wheat/Stage2.png" id="3_6cpcc"]
+[ext_resource type="Texture2D" uid="uid://ddxn5bj0b6yda" path="res://Assets/Textures/Wheat/Stage3.png" id="4_w3773"]
+[ext_resource type="Texture2D" uid="uid://rco2y7f4hotf" path="res://Assets/Textures/Wheat/Stage4.png" id="5_an2lm"]
+[ext_resource type="Texture2D" uid="uid://bfifdt71y4i0d" path="res://Assets/Textures/Wheat/Stage5.png" id="6_kne01"]
+[ext_resource type="PackedScene" uid="uid://dtwjfggtx1m4" path="res://Assets/Scenes/Items/item_wheat.tscn" id="7_bpco8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dnrct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bpco8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6cpcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_w3773")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_an2lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kne01")
+}],
+"loop": false,
+"name": &"wheat",
+"speed": 1.0
+}]
+
+[node name="Crop" type="Node3D" node_paths=PackedStringArray("CropItem")]
+script = ExtResource("1_sofyh")
+CropName = "wheat"
+GrowthDaysPerStage = PackedInt32Array(3, 4, 4, 3)
+CropItem = NodePath("Item_Wheat")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.3, 0)
+cast_shadow = 2
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 4
+sprite_frames = SubResource("SpriteFrames_dnrct")
+animation = &"wheat"
+speed_scale = 0.0
+
+[node name="Item_Wheat" parent="." instance=ExtResource("7_bpco8")]
+visible = false
+
+[node name="StatusPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+font_size = 36

@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://bf51hidu6l3ag"]
+
+[ext_resource type="Script" uid="uid://1jb6nvdtdy4" path="res://Assets/Scripts/Interactables/Mud.cs" id="1_2bwhv"]
+
+[sub_resource type="Gradient" id="Gradient_gh38u"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+colors = PackedColorArray(0.513726, 0.231373, 0, 1, 0.392157, 0.231373, 0, 1, 0.513726, 0.231373, 0, 1, 0.392157, 0.231373, 0, 1, 0.513726, 0.231373, 0, 1, 0.392157, 0.231373, 0, 1, 0.513726, 0.231373, 0, 1, 0.392157, 0.231373, 0, 1, 0.513726, 0.231373, 0, 1, 0.392157, 0.231373, 0, 1, 0.513726, 0.231373, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cmyrt"]
+gradient = SubResource("Gradient_gh38u")
+width = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbce8"]
+albedo_texture = SubResource("GradientTexture1D_cmyrt")
+texture_filter = 4
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vp1xa"]
+material = SubResource("StandardMaterial3D_cbce8")
+center_offset = Vector3(0, 0.02, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2bwhv"]
+radius = 0.8
+
+[node name="Mud" type="Node3D" groups=["mud"]]
+script = ExtResource("1_2bwhv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_vp1xa")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_2bwhv")
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 播种/收割"
+font_size = 36

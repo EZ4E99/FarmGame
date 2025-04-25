@@ -1,0 +1,423 @@
+[gd_scene load_steps=36 format=3 uid="uid://cdp8h3tiisff4"]
+
+[ext_resource type="Script" uid="uid://be30xu613hukv" path="res://Assets/Scripts/Interactables/Furnace.cs" id="1_4aw74"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d28y4"]
+size = Vector3(3, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4aw74"]
+albedo_color = Color(0.314316, 0.314316, 0.314316, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ytnuq"]
+material = SubResource("StandardMaterial3D_4aw74")
+size = Vector3(0.3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cx403"]
+material = SubResource("StandardMaterial3D_4aw74")
+size = Vector3(0.7, 1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj5ja"]
+albedo_color = Color(0.466181, 0.466181, 0.466181, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g441y"]
+material = SubResource("StandardMaterial3D_cj5ja")
+size = Vector3(0.7, 0.1, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cbo0p"]
+material = SubResource("StandardMaterial3D_cj5ja")
+size = Vector3(1.3, 0.1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yjf6h"]
+material = SubResource("StandardMaterial3D_cj5ja")
+height = 0.5
+radial_segments = 16
+is_hemisphere = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l8gaa"]
+material = SubResource("StandardMaterial3D_cj5ja")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eys70"]
+albedo_color = Color(1, 1, 0.517647, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_p7gb4"]
+material = SubResource("StandardMaterial3D_eys70")
+radius = 0.1
+height = 0.1
+radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d28y4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trm6x"]
+albedo_color = Color(1, 0.67451, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_60hdo"]
+material = SubResource("StandardMaterial3D_trm6x")
+size = Vector3(0.5, 0.05, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu1v0"]
+albedo_color = Color(0.471126, 0.355526, 3.85046e-07, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_i3ech"]
+material = SubResource("StandardMaterial3D_mu1v0")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.5
+radial_segments = 8
+
+[sub_resource type="Curve" id="Curve_wkywx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_scqqw"]
+width = 32
+curve = SubResource("Curve_wkywx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u71bn"]
+emission_shape = 3
+emission_box_extents = Vector3(0.3, 0.1, 0.3)
+gravity = Vector3(0, 1, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_scqqw")
+
+[sub_resource type="Gradient" id="Gradient_wpsm7"]
+colors = PackedColorArray(1, 0.529412, 0, 1, 1, 1, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kypt8"]
+gradient = SubResource("Gradient_wpsm7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xgb0"]
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_kypt8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_1f26b"]
+material = SubResource("StandardMaterial3D_3xgb0")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ukxwf"]
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 0.1, 0.1)
+gravity = Vector3(0, 1, 0)
+scale_min = 0.0
+scale_curve = SubResource("CurveTexture_scqqw")
+
+[sub_resource type="Gradient" id="Gradient_54fbr"]
+colors = PackedColorArray(0.29219, 0.29219, 0.29219, 0.975, 0.489622, 0.489622, 0.489622, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w8rje"]
+gradient = SubResource("Gradient_54fbr")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3kio3"]
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture2D_w8rje")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_76aap"]
+material = SubResource("StandardMaterial3D_3kio3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxls2"]
+size = Vector3(1.4, 2, 1.2)
+
+[sub_resource type="Animation" id="Animation_g441y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/Dough/MeshInstance3D7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/Dough/MeshInstance3D7:material_override")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles/Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Particles/Smoke:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Meshes/Dough:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Meshes/Woods:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ytnuq"]
+albedo_color = Color(1, 1, 0.580392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cx403"]
+albedo_color = Color(1, 0.713726, 0.215686, 1)
+
+[sub_resource type="Animation" id="Animation_cj5ja"]
+resource_name = "bake"
+length = 5.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meshes/Dough/MeshInstance3D7:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 4, 5, 5.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1.73, 2.32), Vector3(1, 1.73, 2.32), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meshes/Dough/MeshInstance3D7:material_override")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 4, 5, 5.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_ytnuq"), SubResource("StandardMaterial3D_cx403"), SubResource("StandardMaterial3D_cx403"), SubResource("StandardMaterial3D_ytnuq")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Particles/Fire:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Particles/Smoke:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Meshes/Dough:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Meshes/Woods:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbo0p"]
+_data = {
+&"RESET": SubResource("Animation_g441y"),
+&"bake": SubResource("Animation_cj5ja")
+}
+
+[node name="Furnace" type="Area3D"]
+collision_mask = 7
+script = ExtResource("1_4aw74")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+shape = SubResource("BoxShape3D_d28y4")
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+mesh = SubResource("BoxMesh_ytnuq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("BoxMesh_ytnuq")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+mesh = SubResource("BoxMesh_cx403")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.15)
+mesh = SubResource("BoxMesh_g441y")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+mesh = SubResource("BoxMesh_cbo0p")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1.3, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("SphereMesh_yjf6h")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+mesh = SubResource("CylinderMesh_l8gaa")
+
+[node name="Dough" type="Node3D" parent="Meshes"]
+visible = false
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Meshes/Dough"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.145, 0)
+mesh = SubResource("SphereMesh_p7gb4")
+skeleton = NodePath("../MeshInstance3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_d28y4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Dough"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+mesh = SubResource("BoxMesh_60hdo")
+
+[node name="Woods" type="Node3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(0.707107, 0.707107, -3.09086e-08, 0, -4.37114e-08, -1, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(-0.707107, 0.707107, -3.09086e-08, 2.11758e-22, -4.37114e-08, -1, -0.707107, -0.707107, 3.09086e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(0.34202, 0.939693, -4.10753e-08, 0, -4.37114e-08, -1, -0.939693, 0.34202, -1.49502e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(-0.939693, 0.34202, -1.49502e-08, 2.11758e-22, -4.37114e-08, -1, -0.34202, -0.939693, 4.10753e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(-0.173648, 0.984808, -4.30473e-08, 0, -4.37114e-08, -1, -0.984808, -0.173648, 7.5904e-09, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes/Woods"]
+transform = Transform3D(-0.984808, -0.173648, 7.5904e-09, -2.88433e-15, -4.37114e-08, -1, 0.173648, -0.984808, 4.30473e-08, 0, 0, 0.1)
+mesh = SubResource("CylinderMesh_i3ech")
+
+[node name="Particles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Fire" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_u71bn")
+draw_pass_1 = SubResource("QuadMesh_1f26b")
+
+[node name="Smoke" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+emitting = false
+amount = 16
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_ukxwf")
+draw_pass_1 = SubResource("QuadMesh_76aap")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0.5, 0)
+shape = SubResource("BoxShape3D_fxls2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cbo0p")
+}
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 烘烤面包
+需要 面团、木柴"
+font_size = 36

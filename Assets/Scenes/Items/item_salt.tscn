@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckqvl6s6ct408"]
+
+[ext_resource type="Script" uid="uid://ddqrdnhh5q14j" path="res://Assets/Scripts/Inventory/Item.cs" id="1_bpxuf"]
+[ext_resource type="Texture2D" uid="uid://d3gdhsdgcyc6y" path="res://Assets/Textures/Sugar_JE2_BE2.png" id="2_bpxuf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ek3i"]
+size = Vector2(48, 48)
+
+[node name="Item_Salt" type="Area2D"]
+script = ExtResource("1_bpxuf")
+ItemName = "Salt"
+Icon = ExtResource("2_bpxuf")
+IsStackable = true
+ItemType = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("2_bpxuf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0ek3i")

@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs4lh8fvmji70"]
+
+[ext_resource type="Script" uid="uid://dnxkraand0s33" path="res://Assets/Scripts/Inventory/HotBar.cs" id="1_unejh"]
+[ext_resource type="PackedScene" uid="uid://c2f16ym8vinhe" path="res://Assets/Scenes/UI/hot_bar_slot.tscn" id="2_unejh"]
+
+[node name="HotBar" type="Panel" groups=["hotbar"]]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -545.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_unejh")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -268.0
+offset_top = -25.0
+offset_right = 268.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+columns = 10
+
+[node name="HotBarSlot1" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot2" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot3" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot4" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot5" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot6" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot7" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot8" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot9" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2
+
+[node name="HotBarSlot0" parent="GridContainer" instance=ExtResource("2_unejh")]
+layout_mode = 2

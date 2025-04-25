@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw1vthxs6pwgq"]
+
+[ext_resource type="Script" uid="uid://cb3pa4uebb6wk" path="res://Assets/Scripts/Interactables/ItemPickup.cs" id="1_x352u"]
+[ext_resource type="Texture2D" uid="uid://crpr5ofrni6rk" path="res://Assets/Textures/207883.png" id="2_ju1a0"]
+[ext_resource type="PackedScene" uid="uid://bh1k1u6ecwej1" path="res://Assets/Scenes/Items/item_yeast.tscn" id="3_devfj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyow2"]
+
+[node name="Yeast" type="Area3D" node_paths=PackedStringArray("_item")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_x352u")
+_item = NodePath("Item_Yeast")
+_quantity = 5
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+cast_shadow = 2
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 4
+texture = ExtResource("2_ju1a0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vyow2")
+
+[node name="Item_Yeast" parent="." instance=ExtResource("3_devfj")]
+visible = false
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 拾取 酵母"
+font_size = 36

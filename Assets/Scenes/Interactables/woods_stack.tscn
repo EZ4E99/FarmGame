@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3 uid="uid://pdcnickbafo8"]
+
+[ext_resource type="Script" uid="uid://bqkhrk2ut363" path="res://Assets/Scripts/Interactables/WoodsStack.cs" id="1_88pra"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_88pra"]
+size = Vector3(3, 2.5, 2)
+
+[sub_resource type="Gradient" id="Gradient_ofxt1"]
+colors = PackedColorArray(0.662745, 0.286275, 0, 1, 0.342836, 0.165858, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_88pra"]
+gradient = SubResource("Gradient_ofxt1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6eb7o"]
+albedo_texture = SubResource("GradientTexture2D_88pra")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dohge"]
+material = SubResource("StandardMaterial3D_6eb7o")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.7
+radial_segments = 16
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ofxt1"]
+size = Vector3(1.6, 1.1, 0.8)
+
+[node name="WoodsStack" type="Area3D"]
+collision_mask = 7
+script = ExtResource("1_88pra")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.75, 0)
+shape = SubResource("BoxShape3D_88pra")
+
+[node name="Meshes" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.4, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.8, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.6, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.2, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.1, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.1, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.5, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.3, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.9, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.7, 0.2, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0.4, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.4, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.6, 0.4, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.4, 0.4, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.3, 0.6, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0.8, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="Meshes"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.1, 0.6, 0)
+mesh = SubResource("CylinderMesh_dohge")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.45, -2.98023e-08)
+shape = SubResource("BoxShape3D_ofxt1")
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 取出一根木柴"
+font_size = 36
