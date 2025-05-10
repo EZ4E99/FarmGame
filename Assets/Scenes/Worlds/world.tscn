@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://e4vy55asewd3"]
+[gd_scene load_steps=29 format=3 uid="uid://e4vy55asewd3"]
 
 [ext_resource type="PackedScene" uid="uid://jt6sr7y7vovf" path="res://Assets/Scenes/Characters/player.tscn" id="1_xqahv"]
 [ext_resource type="PackedScene" uid="uid://dw1vthxs6pwgq" path="res://Assets/Scenes/Items/PickupItems/yeast.tscn" id="2_k5uew"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bohpifk6hv4pq" path="res://Assets/Scenes/Interactables/bed.tscn" id="11_qbsw3"]
 [ext_resource type="PackedScene" uid="uid://cdp8h3tiisff4" path="res://Assets/Scenes/Interactables/furnace.tscn" id="12_lad1g"]
 [ext_resource type="PackedScene" uid="uid://pdcnickbafo8" path="res://Assets/Scenes/Interactables/woods_stack.tscn" id="13_r30t5"]
+[ext_resource type="PackedScene" uid="uid://3opqcmu2sr3d" path="res://Assets/Scenes/Interactables/wheelbarrow.tscn" id="17_pbk16"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.647059, 1, 1, 1)
@@ -282,10 +283,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.4, 
 [node name="MeshInstance3D7" parent="Environment/Shed3" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, -1.5)
 
-[node name="CollisionShape3D2" parent="Environment/Shed3/StaticBody3D" index="1"]
+[node name="CollisionShape3D2" parent="Environment/Shed3/StaticBody3D" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, -1.5)
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Environment/Shed3/StaticBody3D" index="3"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Environment/Shed3/StaticBody3D" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.2, 0)
 shape = SubResource("ConcavePolygonShape3D_ot7nn")
 
@@ -316,5 +317,8 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Environment/Ground/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0vdfb")
+
+[node name="Wheelbarrow" parent="." instance=ExtResource("17_pbk16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
 
 [editable path="Environment/Shed3"]

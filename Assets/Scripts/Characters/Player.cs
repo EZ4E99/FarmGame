@@ -5,6 +5,14 @@ using System.Linq;
 
 public partial class Player : CharacterBody3D
 {
+    public enum PlayerState
+    {
+        Idle,        // 静止
+        Run,      // 奔跑
+        Hold_Idle,  // 手持静止
+        Hold_Run,     // 手持奔跑
+    }
+
     // 移动参数
     [Export] public float Speed = 5.0f;
     [Export] public float JumpForce = 4.5f;
