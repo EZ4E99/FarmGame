@@ -9,8 +9,8 @@ public partial class Player : CharacterBody3D
     {
         Idle,        // 静止
         Run,      // 奔跑
-        Hold_Idle,  // 手持静止
-        Hold_Run,     // 手持奔跑
+        Idle_Holding,  // 手持静止
+        Run_Holding,     // 手持奔跑
     }
 
     // 移动参数
@@ -20,10 +20,13 @@ public partial class Player : CharacterBody3D
     [Export] public float CameraMinVertical = -30.0f;
     [Export] public float CameraMaxVertical = 60.0f;
     [Export] public float RotationSpeed = 10.0f; // 旋转平滑速度
+    public PlayerState CurrentPlayerState = PlayerState.Idle;
+    public bool IsUsingWheelbarrow = false;
 
     // 节点引用
     private Node3D _playerModel;
     private AnimationPlayer _playerModelAnimationPlayer;
+    private Node3D _wheelbarrow;
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private CanvasLayer _inventoryUI;
@@ -46,6 +49,7 @@ public partial class Player : CharacterBody3D
         
         _playerModel = GetNode<Node3D>("Character");
         _playerModelAnimationPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
+        _wheelbarrow = GetNode<Node3D>("Character/Items/Wheelbarrow");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _inventoryUI = GetNode<CanvasLayer>("HUD/InventoryUI");
@@ -75,7 +79,8 @@ public partial class Player : CharacterBody3D
             
             // 垂直旋转（摄像机）
             _cameraRotation.Y -= mouseMotion.Relative.Y * MouseSensitivity;
-            _cameraRotation.Y = Mathf.Clamp(
+            _cameraRotation.Y = Mathf.Clamp
+            (
                 _cameraRotation.Y,
                 Mathf.DegToRad(CameraMinVertical),
                 Mathf.DegToRad(CameraMaxVertical)
@@ -170,10 +175,22 @@ public partial class Player : CharacterBody3D
         Velocity = velocity;
         MoveAndSlide();
 
-        if (Velocity.Length() != 0)
-            _playerModelAnimationPlayer.Play("Run");
+        if (Velocity.Length() == 0)
+        {
+            if (IsUsingWheelbarrow)
+                CurrentPlayerState = PlayerState.Idle_Holding;
+            else
+                CurrentPlayerState = PlayerState.Idle;
+        }
         else
-            _playerModelAnimationPlayer.Play("Idle");
+        {
+            if (IsUsingWheelbarrow)
+                CurrentPlayerState = PlayerState.Run_Holding;
+            else
+                CurrentPlayerState = PlayerState.Run;
+        }
+
+        _playerModelAnimationPlayer.Play(CurrentPlayerState.ToString());
     }
 
     public void UpdateHotBar()
@@ -231,6 +248,12 @@ public partial class Player : CharacterBody3D
                 _currentSelectedItem = _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem);
             }
         }
+    }
+
+    public void UpdateWheelbarrow(bool visible)
+    {
+        _wheelbarrow.Visible = visible;
+        IsUsingWheelbarrow = visible;
     }
 
     public void OnMenuCloseButtonPressed()

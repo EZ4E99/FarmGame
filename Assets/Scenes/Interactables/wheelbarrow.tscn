@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://3opqcmu2sr3d"]
+[gd_scene load_steps=10 format=3 uid="uid://3opqcmu2sr3d"]
 
+[ext_resource type="Script" uid="uid://cy4eborwot04x" path="res://Assets/Scripts/Interactables/Wheelbarrow.cs" id="1_kh121"]
 [ext_resource type="ArrayMesh" uid="uid://dunf6pypmt3yn" path="res://Assets/Models/wheelbarrow.obj" id="1_uwe7k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kh121"]
@@ -26,6 +27,7 @@ size = Vector3(0.7, 0.5, 1)
 [node name="Wheelbarrow" type="Area3D"]
 collision_layer = 4
 collision_mask = 3
+script = ExtResource("1_kh121")
 
 [node name="Wheelbarrow" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, -0.03, 0)
@@ -44,7 +46,7 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 1
-text = "[E] 使用 小推车"
+text = "[E] 使用/放置 小推车"
 font_size = 36
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

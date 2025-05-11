@@ -1,12 +1,27 @@
-[gd_scene load_steps=16 format=3 uid="uid://jt6sr7y7vovf"]
+[gd_scene load_steps=21 format=3 uid="uid://jt6sr7y7vovf"]
 
 [ext_resource type="Script" uid="uid://8kxberig455b" path="res://Assets/Scripts/Characters/Player.cs" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bqjvw8mqtdp2e" path="res://Assets/Scripts/Inventory/Inventory.cs" id="2_38rej"]
 [ext_resource type="PackedScene" uid="uid://dwy8ancd46t80" path="res://Assets/Models/panda.gltf" id="2_sm60w"]
 [ext_resource type="PackedScene" uid="uid://yd11okg6xeuq" path="res://Assets/Scenes/UI/inventory_slot.tscn" id="3_23lac"]
-[ext_resource type="PackedScene" uid="uid://3opqcmu2sr3d" path="res://Assets/Scenes/Interactables/wheelbarrow.tscn" id="3_o2bcq"]
+[ext_resource type="ArrayMesh" uid="uid://dunf6pypmt3yn" path="res://Assets/Models/wheelbarrow.obj" id="3_o2bcq"]
 [ext_resource type="PackedScene" uid="uid://dpuhdt2mgiuu5" path="res://Assets/Scenes/UI/tooltip.tscn" id="3_t1xgp"]
 [ext_resource type="PackedScene" uid="uid://cs4lh8fvmji70" path="res://Assets/Scenes/UI/hot_bar.tscn" id="5_23lac"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rg2dv"]
+albedo_color = Color(0.629675, 0.629675, 0.629675, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc8y2"]
+albedo_color = Color(0.259293, 0.259294, 0.259294, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxl0n"]
+albedo_color = Color(0.533333, 0.258824, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kofg"]
+albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gayio"]
+albedo_color = Color(0.275148, 0.205216, 4.81308e-08, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i3pqv"]
 
@@ -56,13 +71,6 @@ script = ExtResource("1_4flbx")
 
 [node name="Character" parent="." instance=ExtResource("2_sm60w")]
 transform = Transform3D(-0.45, 0, 6.79481e-08, 0, 0.45, 0, -6.79481e-08, 0, -0.45, 0, -0.9, 0)
-
-[node name="Items" type="Node3D" parent="Character"]
-transform = Transform3D(-2.22222, 0, -3.35546e-07, 0, 2.22222, 0, 3.35546e-07, 0, -2.22222, 0, 2, 0)
-
-[node name="Wheelbarrow" parent="Character/Items" instance=ExtResource("3_o2bcq")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -0.9, -1.2)
-visible = false
 
 [node name="Skeleton3D" parent="Character/CharacterArmature" index="0"]
 bones/1/rotation = Quaternion(1.16842e-05, 0.705806, 0.708405, 1.2001e-05)
@@ -114,6 +122,19 @@ visible = false
 
 [node name="Pan" parent="Character/CharacterArmature/Skeleton3D" index="2"]
 visible = false
+
+[node name="Items" type="Node3D" parent="Character"]
+transform = Transform3D(-2.22222, 0, -3.35546e-07, 0, 2.22222, 0, 3.35546e-07, 0, -2.22222, 0, 2, 0)
+
+[node name="Wheelbarrow" type="MeshInstance3D" parent="Character/Items"]
+transform = Transform3D(-0.02, 1.23856e-16, -1.74846e-09, 1.52388e-10, 0.0199239, -0.00174311, 1.7418e-09, -0.00174311, -0.0199239, 7.81599e-14, -0.930001, -1.1)
+visible = false
+mesh = ExtResource("3_o2bcq")
+surface_material_override/0 = SubResource("StandardMaterial3D_rg2dv")
+surface_material_override/1 = SubResource("StandardMaterial3D_rc8y2")
+surface_material_override/2 = SubResource("StandardMaterial3D_fxl0n")
+surface_material_override/3 = SubResource("StandardMaterial3D_1kofg")
+surface_material_override/4 = SubResource("StandardMaterial3D_gayio")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_i3pqv")
