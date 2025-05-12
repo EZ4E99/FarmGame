@@ -35,6 +35,14 @@ public partial class Mud : Node3D
         {
             HarvestCrop();
         }
+        else if (Input.IsActionJustPressed("action_use") && _isColliding && _hasCrop && _player._currentSelectedItem?.ItemName == "Shovel")
+        {
+            RemoveCrop();
+        }
+        else if (Input.IsActionJustPressed("action_use") && _isColliding && _hasCrop && _player._currentSelectedItem?.ItemName == "Fertilizer")
+        {
+            Fertilize();
+        }
         base._PhysicsProcess(delta);
     }
 
@@ -44,6 +52,25 @@ public partial class Mud : Node3D
         if (!body.IsInGroup("player")) return;
         else
         {
+            switch (_player._currentSelectedItem?.ItemName)
+            {
+                case "Sickle":
+                    _label3D.Text = "[E] 收获 （成熟时）";
+                    break;
+                case "WheatSeed":
+                    _label3D.Text = "[E] 播种";
+                    break;
+                case "Shovel":
+                    _label3D.Text = "[E] 铲除";
+                    break;
+                case "Fertilizer":
+                    _label3D.Text = "[E] 施肥";
+                    break;
+                default:
+                    _label3D.Text = "";
+                    break;
+            }
+
             _label3D.Show();
             _isColliding = true;
             _currentCrop?.UpdateStatusPrompt(true, _currentStage.ToString(), _currentCrop.GetDaysForStage(_currentStage) - _daysInCurrentStage);
@@ -82,6 +109,15 @@ public partial class Mud : Node3D
         AddChild(newCropIns);
     }
 
+    // 移除作物
+    public void RemoveCrop()
+    {
+        _currentCrop.QueueFree();
+        _currentCrop = null;
+        _hasCrop = false;
+        _currentStage = GrowthStage.种子;
+    }
+
     // 收获
     public void HarvestCrop()
     {
@@ -111,6 +147,17 @@ public partial class Mud : Node3D
             _currentCrop.UpdateAnimatedSprites3D(_currentStage);
             _daysInCurrentStage = 0;
         }
+    }
+
+    // 施肥
+    public void Fertilize()
+    {   
+        // 处理背包物品
+        Inventory inventory = (Inventory)GetTree().GetFirstNodeInGroup("inventory");
+        inventory.RetrieveItem("Fertilizer");
+        _player.UpdateHotBar();
+        Grow();
+        _currentCrop?.UpdateStatusPrompt(true, _currentStage.ToString(), _currentCrop.GetDaysForStage(_currentStage) - _daysInCurrentStage);
     }
 
     private void AdvanceToNextStage()

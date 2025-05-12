@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://d284yms4ajv26"]
+
+[ext_resource type="Script" uid="uid://cb3pa4uebb6wk" path="res://Assets/Scripts/Interactables/ItemPickup.cs" id="1_hj2xg"]
+[ext_resource type="Texture2D" uid="uid://hriqij3y14pc" path="res://Assets/Textures/Invicon_Stone_Shovel.png" id="2_sm5xf"]
+[ext_resource type="PackedScene" uid="uid://du28c77dbchjl" path="res://Assets/Scenes/Items/item_shovel.tscn" id="3_nnp4c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyow2"]
+
+[node name="Shovel" type="Area3D" node_paths=PackedStringArray("_item")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_hj2xg")
+_item = NodePath("Item_Shovel")
+_quantity = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+cast_shadow = 2
+billboard = 1
+shaded = true
+alpha_cut = 1
+texture_filter = 4
+texture = ExtResource("2_sm5xf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vyow2")
+
+[node name="Item_Shovel" parent="." instance=ExtResource("3_nnp4c")]
+visible = false
+position = Vector2(199, 70)
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 拾取 铲子"
+font_size = 36

@@ -7,10 +7,10 @@ public partial class Player : CharacterBody3D
 {
     public enum PlayerState
     {
-        Idle,        // 静止
+        Idle,     // 静止
         Run,      // 奔跑
         Idle_Holding,  // 手持静止
-        Run_Holding,     // 手持奔跑
+        Run_Holding,   // 手持奔跑
     }
 
     // 移动参数
@@ -22,11 +22,16 @@ public partial class Player : CharacterBody3D
     [Export] public float RotationSpeed = 10.0f; // 旋转平滑速度
     public PlayerState CurrentPlayerState = PlayerState.Idle;
     public bool IsUsingWheelbarrow = false;
+    public bool HasShovel = false;
+    public int WheelbarrowCurrentCowpie = 0;
 
     // 节点引用
     private Node3D _playerModel;
     private AnimationPlayer _playerModelAnimationPlayer;
+    private AnimationPlayer _itemAnimationPlayer;
     private Node3D _wheelbarrow;
+    private Node3D _shovel;
+    private Label3D _currentCowpieCount;
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private CanvasLayer _inventoryUI;
@@ -49,7 +54,10 @@ public partial class Player : CharacterBody3D
         
         _playerModel = GetNode<Node3D>("Character");
         _playerModelAnimationPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
+        _itemAnimationPlayer = GetNode<AnimationPlayer>("Character/Items/ItemAnimationPlayer");
         _wheelbarrow = GetNode<Node3D>("Character/Items/Wheelbarrow");
+        _shovel = GetNode<Node3D>("Character/Items/Wheelbarrow/shovel");
+        _currentCowpieCount = GetNode<Label3D>("Character/Items/Wheelbarrow/Label3D");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _inventoryUI = GetNode<CanvasLayer>("HUD/InventoryUI");
@@ -224,6 +232,9 @@ public partial class Player : CharacterBody3D
         {
             mud.Grow();
         }
+
+        CompostBox compostBox = (CompostBox)GetTree().GetFirstNodeInGroup("compost_box");
+        compostBox.Compost();
     }
 
     public void ToggleMenu()
@@ -254,6 +265,28 @@ public partial class Player : CharacterBody3D
     {
         _wheelbarrow.Visible = visible;
         IsUsingWheelbarrow = visible;
+    }
+
+    public void AddWheelbarrowCowpie()
+    {
+        if (!IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5) return;
+
+        WheelbarrowCurrentCowpie++;
+        _currentCowpieCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _itemAnimationPlayer.Play("collect_cowpie_" + WheelbarrowCurrentCowpie);
+    }
+
+    public void UpdateShovel()
+    {
+        HasShovel = true;
+        _shovel.Show();
+    }
+
+    public void FillCompostBox()
+    {
+        WheelbarrowCurrentCowpie = 0;
+        _currentCowpieCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _itemAnimationPlayer.Play("fill_compost_box");
     }
 
     public void OnMenuCloseButtonPressed()

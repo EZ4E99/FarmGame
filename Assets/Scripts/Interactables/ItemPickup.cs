@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 
 public partial class ItemPickup : Area3D
 {
@@ -49,6 +48,8 @@ public partial class ItemPickup : Area3D
         {
             Inventory inventory = (Inventory)GetTree().GetFirstNodeInGroup("inventory");
             inventory.AddItem(_item, _quantity);
+
+            if (_item.ItemName == "Shovel") _player.UpdateShovel();
 
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             QueueFree(); // 销毁物品（在本帧结束时）

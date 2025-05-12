@@ -44,5 +44,4 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 1
-text = "[E] 播种/收割"
 font_size = 36
