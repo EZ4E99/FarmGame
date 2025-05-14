@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://be30xu613hukv" path="res://Assets/Scripts/Interactables/Furnace.cs" id="1_4aw74"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d28y4"]
-size = Vector3(3, 2, 2)
+size = Vector3(1.4, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4aw74"]
 albedo_color = Color(0.314316, 0.314316, 0.314316, 1)
@@ -307,7 +307,7 @@ collision_mask = 7
 script = ExtResource("1_4aw74")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0.5, 0.5)
 shape = SubResource("BoxShape3D_d28y4")
 
 [node name="Meshes" type="Node3D" parent="."]
