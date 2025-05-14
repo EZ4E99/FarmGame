@@ -44,7 +44,7 @@ public partial class ItemPickup : Area3D
 
     public async override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
+        if (Input.IsActionJustPressed("action_use") && _isColliding)
         {
             Inventory inventory = (Inventory)GetTree().GetFirstNodeInGroup("inventory");
             inventory.AddItem(_item, _quantity);
