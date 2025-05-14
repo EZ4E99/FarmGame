@@ -23,7 +23,7 @@ public partial class WoodsStack : Area3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding)
+        if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
         {
             Inventory inventory = (Inventory)GetTree().GetFirstNodeInGroup("inventory");
             inventory.AddItem(Wood, 1);

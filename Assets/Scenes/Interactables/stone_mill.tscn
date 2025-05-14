@@ -37,7 +37,8 @@ bottom_radius = 0.05
 height = 0.3
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_40ykd"]
-radius = 1.0
+height = 1.1
+radius = 0.7
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tmyox"]
 height = 1.0
@@ -81,6 +82,7 @@ _data = {
 }
 
 [node name="StoneMill" type="Area3D"]
+collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_req5i")
 
@@ -119,7 +121,7 @@ mesh = SubResource("CylinderMesh_u28o0")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
 shape = SubResource("CylinderShape3D_40ykd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

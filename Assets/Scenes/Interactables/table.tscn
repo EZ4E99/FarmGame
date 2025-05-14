@@ -175,6 +175,7 @@ _data = {
 }
 
 [node name="Table" type="Area3D"]
+collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_ypson")
 

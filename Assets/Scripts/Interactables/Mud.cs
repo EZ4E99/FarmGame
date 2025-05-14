@@ -27,6 +27,8 @@ public partial class Mud : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (_player.IsUsingWheelbarrow) return;
+        
         if (Input.IsActionJustPressed("action_use") && _isColliding && !_hasCrop)
         {
             PlantCrop(_player._currentSelectedItem);

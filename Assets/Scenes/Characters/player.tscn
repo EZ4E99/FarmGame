@@ -378,8 +378,8 @@ fill_to = Vector2(0.5, 0)
 
 [sub_resource type="Gradient" id="Gradient_38rej"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.0833333, 0.833333, 1)
-colors = PackedColorArray(0, 0, 0, 0.470588, 0.099986, 0.099986, 0.099986, 0.392157, 0, 0, 0, 0.470588, 0, 0, 0, 0.470588)
+offsets = PackedFloat32Array(0, 0.166667, 0.833333)
+colors = PackedColorArray(0, 0, 0, 0.745098, 0.0980392, 0.0980392, 0.0980392, 0.666667, 0, 0, 0, 0.745098)
 metadata/_snap_enabled = true
 metadata/_snap_count = 36
 
@@ -402,8 +402,8 @@ outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
-collision_layer = 2
-collision_mask = 7
+collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_4flbx")
 
 [node name="Character" parent="." instance=ExtResource("2_sm60w")]
@@ -474,7 +474,7 @@ surface_material_override/3 = SubResource("StandardMaterial3D_1kofg")
 surface_material_override/4 = SubResource("StandardMaterial3D_gayio")
 
 [node name="shovel" parent="Character/Items/Wheelbarrow" instance=ExtResource("4_rg2dv")]
-transform = Transform3D(10.6066, 8.30187, -26.8064, -6.83958, 28.5578, 6.13804, 27.2162, 3.94135, 11.9894, -11.2467, 25.6006, -14.1472)
+transform = Transform3D(10.6067, 8.3019, -26.8063, -6.83959, 28.5578, 6.13803, 27.2162, 3.94132, 11.9895, -11.2467, 25.6006, -14.1472)
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
@@ -486,7 +486,7 @@ transform = Transform3D(0.01, -5.68434e-17, 3.4106e-16, 5.68434e-17, 0.01, -5.36
 mesh = SubResource("SphereMesh_rc8y2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
-transform = Transform3D(0.01, -7.81596e-17, 5.68434e-16, 7.81596e-17, 0.01, -8.34464e-10, -5.68434e-16, 8.34464e-10, 0.01, -4.50297, 16.412, -6.45497)
+transform = Transform3D(0.01, -7.81595e-17, 5.68434e-16, 7.81596e-17, 0.01, -8.34464e-10, -5.68434e-16, 8.34464e-10, 0.01, -4.50297, 16.412, -6.45497)
 mesh = SubResource("SphereMesh_rc8y2")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
@@ -494,7 +494,7 @@ transform = Transform3D(0.01, -1.06581e-16, 9.09494e-16, 1.06581e-16, 0.01, -1.2
 mesh = SubResource("SphereMesh_rc8y2")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
-transform = Transform3D(0.01, -1.27897e-16, 1.36424e-15, 1.27898e-16, 0.01, -1.66893e-09, -1.36424e-15, 1.66893e-09, 0.01, -0.706142, 17.3009, 5.41706)
+transform = Transform3D(0.01, -1.27898e-16, 1.36424e-15, 1.27898e-16, 0.01, -1.66893e-09, -1.36424e-15, 1.66893e-09, 0.01, -0.706142, 17.3009, 5.41706)
 mesh = SubResource("SphereMesh_rc8y2")
 
 [node name="Label3D" type="Label3D" parent="Character/Items/Wheelbarrow"]
@@ -519,6 +519,11 @@ shape = SubResource("CapsuleShape3D_i3pqv")
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0.8, 1.5)
 fov = 90.0
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraPivot/Camera3D"]
+target_position = Vector3(0, 0, -3)
+collision_mask = 6
+collide_with_areas = true
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -548,13 +553,21 @@ visible = false
 
 [node name="Panel" type="Panel" parent="HUD/InventoryUI" node_paths=PackedStringArray("InventoryGrid", "Tooltip")]
 texture_filter = 5
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 435.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.5
+offset_top = -240.0
+offset_right = 272.5
+offset_bottom = 240.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_23lac")
 script = ExtResource("2_38rej")
-Cols = 7
+Rows = 5
+Cols = 9
 InventoryGrid = NodePath("GridContainer")
 InventorySlotScene = ExtResource("3_23lac")
 Tooltip = NodePath("Tooltip")
@@ -565,9 +578,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -24.0
-offset_top = 16.0
+offset_top = 20.0
 offset_right = 24.0
-offset_bottom = 50.0
+offset_bottom = 54.0
 grow_horizontal = 2
 text = "背包"
 label_settings = SubResource("LabelSettings_6cd4h")
@@ -580,10 +593,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -180.0
-offset_top = -258.0
-offset_right = 180.0
-offset_bottom = 258.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
@@ -611,6 +620,12 @@ offset_right = -400.0
 
 [node name="HotBar" parent="HUD" instance=ExtResource("5_23lac")]
 layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -272.5
+offset_right = 272.5
+grow_horizontal = 2
 
 [node name="Label" type="Label" parent="HUD"]
 layout_mode = 1

@@ -19,7 +19,7 @@ albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
 albedo_color = Color(0.275148, 0.205216, 4.81308e-08, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwe7k"]
-size = Vector3(1.5, 2, 2)
+size = Vector3(0.8, 0.6, 1.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kh121"]
 size = Vector3(0.7, 0.5, 1)
@@ -50,7 +50,7 @@ text = "[E] 使用/放置 小推车"
 font_size = 36
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.3, 0)
 shape = SubResource("BoxShape3D_uwe7k")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

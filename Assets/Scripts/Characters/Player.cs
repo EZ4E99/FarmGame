@@ -34,7 +34,10 @@ public partial class Player : CharacterBody3D
     private Label3D _currentCowpieCount;
     private Node3D _cameraPivot;
     private Camera3D _camera;
+    private RayCast3D _crosshairRaycast3D;
+    private Node3D Raycast3DCollider = null;
     private CanvasLayer _inventoryUI;
+    private TextureRect _crosshair;
     private Button _closeButton;
     private Panel _menu;
     private Button _menuCloseButton;
@@ -60,7 +63,9 @@ public partial class Player : CharacterBody3D
         _currentCowpieCount = GetNode<Label3D>("Character/Items/Wheelbarrow/Label3D");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
+        _crosshairRaycast3D = GetNode<RayCast3D>("CameraPivot/Camera3D/RayCast3D");
         _inventoryUI = GetNode<CanvasLayer>("HUD/InventoryUI");
+        _crosshair = GetNode<TextureRect>("HUD/Crosshair");
         _closeButton = GetNode<Button>("HUD/InventoryUI/Panel/CloseButton");
         _menu = GetNode<Panel>("HUD/Menu");
         _menuCloseButton = GetNode<Button>("HUD/Menu/VBoxContainer/HBoxContainer/Button2");
@@ -199,6 +204,24 @@ public partial class Player : CharacterBody3D
         }
 
         _playerModelAnimationPlayer.Play(CurrentPlayerState.ToString());
+
+        if (_crosshairRaycast3D.IsColliding())
+        {
+            var newCollider = (Node3D)_crosshairRaycast3D.GetCollider();
+
+            if (IsInstanceValid(Raycast3DCollider) && Raycast3DCollider != newCollider)
+                Raycast3DCollider.Call("OnBodyExited", this);
+
+            Raycast3DCollider = newCollider;
+
+            if (IsInstanceValid(Raycast3DCollider))
+                Raycast3DCollider.Call("OnBodyEntered", this);
+        }
+        else if (IsInstanceValid(Raycast3DCollider))
+        {
+            Raycast3DCollider.Call("OnBodyExited", this);
+            Raycast3DCollider = null;
+        }
     }
 
     public void UpdateHotBar()
@@ -210,10 +233,15 @@ public partial class Player : CharacterBody3D
     {
         _inventoryUI.Visible = !_inventoryUI.Visible;
 
-        if (_inventoryUI.Visible) Input.MouseMode = Input.MouseModeEnum.Visible;
+        if (_inventoryUI.Visible)
+        {
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            _crosshair.Hide();
+        }
         else
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
+            _crosshair.Show();
             _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem);
             if (_hotBar.HotBarSelect(_hotBar.CurrentSelectedItem) != null)
             {
@@ -246,12 +274,14 @@ public partial class Player : CharacterBody3D
             Input.MouseMode = Input.MouseModeEnum.Visible;
             _inventoryUI.Hide();
             _hotBar.Hide();
+            _crosshair.Hide();
             _daysCount.Hide();
         }
         else
         {
             Input.MouseMode = Input.MouseModeEnum.Captured;
             _hotBar.Show();
+            _crosshair.Show();
             _daysCount.Show();
             _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem);
             if (_hotBar.HotBarSelect(_hotBar.CurrentSelectedItem) != null)

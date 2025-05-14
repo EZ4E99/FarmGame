@@ -302,6 +302,7 @@ _data = {
 }
 
 [node name="Furnace" type="Area3D"]
+collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_4aw74")
 

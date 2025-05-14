@@ -25,7 +25,7 @@ public partial class StoneMill : Area3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding)
+        if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
         {
             if (_player._currentSelectedItem != null && _player._currentSelectedItem.Name == "Wheat")
                 MakeFlour(_player._currentSelectedItem);
