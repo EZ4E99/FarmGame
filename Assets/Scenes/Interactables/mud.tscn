@@ -20,23 +20,19 @@ texture_filter = 4
 material = SubResource("StandardMaterial3D_cbce8")
 center_offset = Vector3(0, 0.02, 0)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_2bwhv"]
-height = 1.0
-radius = 0.8
+[sub_resource type="BoxShape3D" id="BoxShape3D_ts674"]
 
-[node name="Mud" type="Node3D" groups=["mud"]]
+[node name="Mud" type="Area3D" groups=["mud"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_2bwhv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_vp1xa")
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 3
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_2bwhv")
+shape = SubResource("BoxShape3D_ts674")
 
 [node name="InteractPrompt" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

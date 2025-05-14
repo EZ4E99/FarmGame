@@ -3,7 +3,6 @@ using System;
 
 public partial class Mud : Node3D
 {
-    private Area3D _area3D;
     private int _daysInCurrentStage;
     private bool _isColliding = false;
     private bool _hasCrop = false;
@@ -14,13 +13,12 @@ public partial class Mud : Node3D
 
     public override void _Ready()
     {
-        _area3D = GetNode<Area3D>("Area3D");
         _label3D = GetNode<Label3D>("InteractPrompt");
 
         Callable bodyEnteredCallable = new(this, MethodName.OnBodyEntered);
-    	_area3D.Connect("body_entered", bodyEnteredCallable, 0); 
+    	Connect("body_entered", bodyEnteredCallable, 0); 
 		Callable bodyExitedCallable = new(this, MethodName.OnBodyExited);
-    	_area3D.Connect("body_exited", bodyExitedCallable, 0); 
+    	Connect("body_exited", bodyExitedCallable, 0); 
 
         _player = (Player)GetTree().GetFirstNodeInGroup("player");
     }
