@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://jt6sr7y7vovf"]
+[gd_scene load_steps=41 format=3 uid="uid://jt6sr7y7vovf"]
 
 [ext_resource type="Script" uid="uid://8kxberig455b" path="res://Assets/Scripts/Characters/Player.cs" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bqjvw8mqtdp2e" path="res://Assets/Scripts/Inventory/Inventory.cs" id="2_38rej"]
@@ -34,6 +34,22 @@ radial_segments = 8
 rings = 4
 is_hemisphere = true
 
+[sub_resource type="Gradient" id="Gradient_ofxt1"]
+colors = PackedColorArray(0.662745, 0.286275, 0, 1, 0.342836, 0.165858, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rg2dv"]
+gradient = SubResource("Gradient_ofxt1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6eb7o"]
+albedo_texture = SubResource("GradientTexture2D_rg2dv")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rc8y2"]
+material = SubResource("StandardMaterial3D_6eb7o")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.7
+radial_segments = 16
+
 [sub_resource type="Animation" id="Animation_rg2dv"]
 length = 0.001
 tracks/0/type = "value"
@@ -59,6 +75,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(-0.206056, -1.15022, -0.235072)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wheelbarrow/Wood1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Wheelbarrow/Wood2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Wheelbarrow/Wood3:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Wheelbarrow/Wood4:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Wheelbarrow/Wood5:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
 }
 
 [sub_resource type="Animation" id="Animation_rc8y2"]
@@ -349,6 +425,86 @@ tracks/6/keys = {
 "values": [Vector3(20, 20, 20), Vector3(20, 20, 20), Vector3(0.01, 0.01, 0.01)]
 }
 
+[sub_resource type="Animation" id="Animation_idr7h"]
+resource_name = "collect_wood_1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/Wood1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30, 30, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_g6kmv"]
+resource_name = "collect_wood_2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/Wood2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30, 30, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_awexu"]
+resource_name = "collect_wood_3"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/Wood3:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30, 30, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_avxoe"]
+resource_name = "collect_wood_4"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/Wood4:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30, 30, 30)]
+}
+
+[sub_resource type="Animation" id="Animation_bsucs"]
+resource_name = "collect_wood_5"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/Wood5:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(30.0001, 30.0001, 30.0001)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_idr7h"]
 _data = {
 &"RESET": SubResource("Animation_rg2dv"),
@@ -357,6 +513,11 @@ _data = {
 &"collect_cowpie_3": SubResource("Animation_1kofg"),
 &"collect_cowpie_4": SubResource("Animation_gayio"),
 &"collect_cowpie_5": SubResource("Animation_w6her"),
+&"collect_wood_1": SubResource("Animation_idr7h"),
+&"collect_wood_2": SubResource("Animation_g6kmv"),
+&"collect_wood_3": SubResource("Animation_awexu"),
+&"collect_wood_4": SubResource("Animation_avxoe"),
+&"collect_wood_5": SubResource("Animation_bsucs"),
 &"fill_compost_box": SubResource("Animation_bwv1k")
 }
 
@@ -497,14 +658,54 @@ mesh = SubResource("SphereMesh_rc8y2")
 transform = Transform3D(0.01, -1.27898e-16, 1.36424e-15, 1.27898e-16, 0.01, -1.66893e-09, -1.36424e-15, 1.66893e-09, 0.01, -0.706142, 17.3009, 5.41706)
 mesh = SubResource("SphereMesh_rc8y2")
 
+[node name="Wood1" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
+transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 19.288, -7.224)
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
+[node name="Wood2" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
+transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 18.9708, -1.03647)
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
+[node name="Wood3" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
+transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 18.4774, 5.38131)
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
+[node name="Wood4" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
+transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 23.3569, -3.51314)
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
+[node name="Wood5" type="MeshInstance3D" parent="Character/Items/Wheelbarrow"]
+transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 22.4873, 2.61865)
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
 [node name="Label3D" type="Label3D" parent="Character/Items/Wheelbarrow"]
-transform = Transform3D(1, 1.77636e-15, 4.26326e-14, 4.44089e-15, 1, -3.72529e-08, -7.10543e-15, 3.72529e-08, 1, -20, 19.9239, -1.74311)
+transform = Transform3D(1, 2.66454e-15, 5.68434e-14, 5.32907e-15, 1, -4.47035e-08, -1.42109e-14, 4.47035e-08, 1, -20, 19.9239, -1.74311)
 pixel_size = 0.15
 billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 4
 text = "0/5"
+
+[node name="Woods" type="Node3D" parent="Character/Items"]
+transform = Transform3D(1, 0, -1.35525e-20, 0, 1, 0, 1.35525e-20, 0, 1, 0, 0, 0)
+
+[node name="Wood1" type="MeshInstance3D" parent="Character/Items/Woods"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 3.55272e-14, -0.2, -0.500001)
+visible = false
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
+
+[node name="Wood2" type="MeshInstance3D" parent="Character/Items/Woods"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 3.55272e-14, 0, -0.500001)
+visible = false
+mesh = SubResource("CylinderMesh_rc8y2")
+skeleton = NodePath("../../..")
 
 [node name="ItemAnimationPlayer" type="AnimationPlayer" parent="Character/Items"]
 libraries = {

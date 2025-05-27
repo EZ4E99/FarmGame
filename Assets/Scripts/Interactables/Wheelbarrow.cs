@@ -26,7 +26,7 @@ public partial class Wheelbarrow : Area3D
 
     public async override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding)
+        if (Input.IsActionJustPressed("action_use") && _isColliding && _player.CurrentHoldWood == 0)
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 

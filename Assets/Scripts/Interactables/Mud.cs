@@ -25,7 +25,7 @@ public partial class Mud : Node3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (_player.IsUsingWheelbarrow) return;
+        if (_player.CurrentPlayerState == Player.PlayerState.Idle_Holding || _player.CurrentPlayerState == Player.PlayerState.Run_Holding) return;
         
         if (Input.IsActionJustPressed("action_use") && _isColliding && !_hasCrop)
         {

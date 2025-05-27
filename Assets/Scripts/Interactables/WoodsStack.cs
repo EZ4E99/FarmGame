@@ -8,14 +8,16 @@ public partial class WoodsStack : Area3D
     private Player _player;
     private Item Wood;
 
+    private int WoodCount = 21;
+
     public override void _Ready()
     {
         _label3D = GetNode<Label3D>("InteractPrompt");
 
         Callable bodyEnteredCallable = new(this, MethodName.OnBodyEntered);
-    	Connect("body_entered", bodyEnteredCallable, 0); 
-		Callable bodyExitedCallable = new(this, MethodName.OnBodyExited);
-    	Connect("body_exited", bodyExitedCallable, 0); 
+        Connect("body_entered", bodyEnteredCallable, 0);
+        Callable bodyExitedCallable = new(this, MethodName.OnBodyExited);
+        Connect("body_exited", bodyExitedCallable, 0);
 
         _player = (Player)GetTree().GetFirstNodeInGroup("player");
         Wood = (Item)GD.Load<PackedScene>("res://Assets/Scenes/Items/item_wood.tscn").Instantiate();
@@ -25,10 +27,51 @@ public partial class WoodsStack : Area3D
     {
         if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
         {
-            Inventory inventory = (Inventory)GetTree().GetFirstNodeInGroup("inventory");
-            inventory.AddItem(Wood, 1);
+            RemoveWood();
+            _player.AddHoldingWood();
         }
+
+        if (Input.IsActionJustPressed("action_use") && _isColliding && _player.IsUsingWheelbarrow)
+        {
+            RemoveWood();
+            _player.AddWheelbarrowWood();
+        }
+
+        if (Input.IsActionJustPressed("action_use_alt") && _isColliding && !_player.IsUsingWheelbarrow)
+        {
+            AddWood();
+            _player.RemoveHoldingWood();
+        }
+
+        if (Input.IsActionJustPressed("action_use_alt") && _isColliding && _player.IsUsingWheelbarrow)
+        {
+            AddWood();
+            _player.RemoveWheelbarrowWood();
+        }
+
         base._PhysicsProcess(delta);
+    }
+
+    public void AddWood()
+    {
+        if (!(_player.CurrentHoldWood == 0 || _player.WheelbarrowCurrentWood == 0)) return;
+
+        WoodCount++;
+        Node3D Wood = GetNode<Node3D>("Meshes/MeshInstance3D" + WoodCount);
+        Wood.Show();
+        
+        GD.Print(WoodCount);
+    }
+
+    public void RemoveWood()
+    {
+        if (_player.CurrentHoldWood >= 2 || _player.WheelbarrowCurrentWood >= 5) return;
+
+        Node3D Wood = GetNode<Node3D>("Meshes/MeshInstance3D" + WoodCount);
+        Wood.Hide();
+        WoodCount--;
+
+        GD.Print(WoodCount);
     }
 
     public void OnBodyEntered(Node3D body)

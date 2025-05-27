@@ -23,7 +23,7 @@ public partial class Well : Area3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
+        if (Input.IsActionJustPressed("action_use") && _isColliding && !!(_player.CurrentPlayerState == Player.PlayerState.Idle_Holding || _player.CurrentPlayerState == Player.PlayerState.Run_Holding))
         {
             if (_player._currentSelectedItem != null && _player._currentSelectedItem.Name == "Bucket")
                 FillWater(_player._currentSelectedItem);

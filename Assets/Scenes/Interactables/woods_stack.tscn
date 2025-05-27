@@ -154,5 +154,6 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 1
-text = "[E] 取出一根木柴"
+text = "[E] 取出一根木柴
+[R] 放入一根木柴"
 font_size = 36

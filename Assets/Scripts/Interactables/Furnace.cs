@@ -31,13 +31,25 @@ public partial class Furnace : Area3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow)
+        if (Input.IsActionJustPressed("action_use") && _isColliding)
         {
-            if (_player._currentSelectedItem != null && _player._currentSelectedItem.Name == "Wood" && !_woods.Visible)
+            if (!_player.IsUsingWheelbarrow)
             {
-                _woods.Show();
-                inventory.RetrieveItem(_player._currentSelectedItem.Name);
+                if (_player.CurrentHoldWood > 0 && !_woods.Visible)
+                {
+                    _woods.Show();
+                    _player.RemoveHoldingWood();
+                }
             }
+            else
+            {
+                if (_player.WheelbarrowCurrentWood > 0 && !_woods.Visible)
+                {
+                    _woods.Show();
+                    _player.RemoveWheelbarrowWood();
+                }
+            }
+
             if (_player._currentSelectedItem != null && _player._currentSelectedItem.Name == "Dough" && !_bread.Visible)
             {
                 _bread.Show();

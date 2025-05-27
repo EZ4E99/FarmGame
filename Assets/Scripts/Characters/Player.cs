@@ -24,6 +24,8 @@ public partial class Player : CharacterBody3D
     public bool IsUsingWheelbarrow = false;
     public bool HasShovel = false;
     public int WheelbarrowCurrentCowpie = 0;
+    public int WheelbarrowCurrentWood = 0;
+    public int CurrentHoldWood = 0;
 
     // 节点引用
     private Node3D _playerModel;
@@ -31,7 +33,7 @@ public partial class Player : CharacterBody3D
     private AnimationPlayer _itemAnimationPlayer;
     private Node3D _wheelbarrow;
     private Node3D _shovel;
-    private Label3D _currentCowpieCount;
+    private Label3D _currentWheelbarrowCount;
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private RayCast3D _crosshairRaycast3D;
@@ -60,7 +62,7 @@ public partial class Player : CharacterBody3D
         _itemAnimationPlayer = GetNode<AnimationPlayer>("Character/Items/ItemAnimationPlayer");
         _wheelbarrow = GetNode<Node3D>("Character/Items/Wheelbarrow");
         _shovel = GetNode<Node3D>("Character/Items/Wheelbarrow/shovel");
-        _currentCowpieCount = GetNode<Label3D>("Character/Items/Wheelbarrow/Label3D");
+        _currentWheelbarrowCount = GetNode<Label3D>("Character/Items/Wheelbarrow/Label3D");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _crosshairRaycast3D = GetNode<RayCast3D>("CameraPivot/Camera3D/RayCast3D");
@@ -190,14 +192,14 @@ public partial class Player : CharacterBody3D
 
         if (Velocity.Length() == 0)
         {
-            if (IsUsingWheelbarrow)
+            if (IsUsingWheelbarrow || CurrentHoldWood > 0)
                 CurrentPlayerState = PlayerState.Idle_Holding;
             else
                 CurrentPlayerState = PlayerState.Idle;
         }
         else
         {
-            if (IsUsingWheelbarrow)
+            if (IsUsingWheelbarrow || CurrentHoldWood > 0)
                 CurrentPlayerState = PlayerState.Run_Holding;
             else
                 CurrentPlayerState = PlayerState.Run;
@@ -291,19 +293,46 @@ public partial class Player : CharacterBody3D
         }
     }
 
+    public void AddHoldingWood()
+    {
+        if (IsUsingWheelbarrow || CurrentHoldWood >= 2) return;
+        CurrentHoldWood++;
+        Node3D Wood = GetNode<Node3D>("Character/Items/Woods/Wood" + CurrentHoldWood);
+        Wood.Show();
+    }
+
+    public void RemoveHoldingWood()
+    {
+        if (IsUsingWheelbarrow || CurrentHoldWood <= 0) return;
+        Node3D Wood = GetNode<Node3D>("Character/Items/Woods/Wood" + CurrentHoldWood);
+        Wood.Hide();
+        CurrentHoldWood--;
+    }
+
     public void UpdateWheelbarrow(bool visible)
     {
+        if ((CurrentPlayerState == PlayerState.Idle_Holding || CurrentPlayerState == PlayerState.Run_Holding) && CurrentHoldWood > 0) return;
+
         _wheelbarrow.Visible = visible;
         IsUsingWheelbarrow = visible;
     }
 
     public void AddWheelbarrowCowpie()
     {
-        if (!IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5) return;
+        if (!IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5 || WheelbarrowCurrentWood < 0) return;
 
         WheelbarrowCurrentCowpie++;
-        _currentCowpieCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
         _itemAnimationPlayer.Play("collect_cowpie_" + WheelbarrowCurrentCowpie);
+    }
+
+    public void AddWheelbarrowWood()
+    {
+        if (!IsUsingWheelbarrow || WheelbarrowCurrentWood > 5 || WheelbarrowCurrentCowpie < 0) return;
+
+        WheelbarrowCurrentWood++;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
+        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood);
     }
 
     public void UpdateShovel()
@@ -315,8 +344,15 @@ public partial class Player : CharacterBody3D
     public void FillCompostBox()
     {
         WheelbarrowCurrentCowpie = 0;
-        _currentCowpieCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
         _itemAnimationPlayer.Play("fill_compost_box");
+    }
+
+    public void RemoveWheelbarrowWood()
+    {
+        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood, -1, -1, true);
+        WheelbarrowCurrentWood--;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
     }
 
     public void OnMenuCloseButtonPressed()
