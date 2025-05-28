@@ -74,19 +74,23 @@ public partial class Wheelbarrow : Area3D
 
         if (visible)
         {
+            _label3D.Text = "[R] 放置 小推车";
             UpdateShovel();
+            _currentWheelbarrowCount.Show();
             staticBody3D.SetCollisionLayerValue(1, false);
         }
         else
         {
+            _label3D.Text = "[E] 使用 小推车";
             _shovel.Hide();
+            _currentWheelbarrowCount.Hide();
             staticBody3D.SetCollisionLayerValue(1, true);
         }
     }
 
     public void AddWheelbarrowCowpie()
     {
-        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5 || WheelbarrowCurrentWood < 0) return;
+        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentCowpie >= 5 || WheelbarrowCurrentWood > 0) return;
 
         WheelbarrowCurrentCowpie++;
         _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
@@ -95,7 +99,7 @@ public partial class Wheelbarrow : Area3D
 
     public void AddWheelbarrowWood()
     {
-        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentWood > 5 || WheelbarrowCurrentCowpie < 0) return;
+        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentWood >= 5 || WheelbarrowCurrentCowpie > 0) return;
 
         WheelbarrowCurrentWood++;
         _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
@@ -116,6 +120,8 @@ public partial class Wheelbarrow : Area3D
 
     public void RemoveWheelbarrowWood()
     {
+        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentWood > 5 || WheelbarrowCurrentWood <= 0) return;
+
         _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood, -1, -1, true);
         WheelbarrowCurrentWood--;
         _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";

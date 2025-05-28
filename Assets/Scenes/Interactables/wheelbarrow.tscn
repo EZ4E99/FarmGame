@@ -603,7 +603,7 @@ billboard = 1
 no_depth_test = true
 fixed_size = true
 texture_filter = 1
-text = "[E] 使用/放置 小推车"
+text = "[E] 使用 小推车"
 font_size = 36
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

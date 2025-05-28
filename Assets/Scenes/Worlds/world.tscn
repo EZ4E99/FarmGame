@@ -478,7 +478,7 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -6.1, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 8.7)
 
 [node name="Wheelbarrow" parent="Environment" instance=ExtResource("17_pbk16")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.7, 0, 16.2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.7, 0, -1.8)
 
 [node name="CompostBox" parent="Environment" instance=ExtResource("19_tcd74")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, -0.1, 18.3)

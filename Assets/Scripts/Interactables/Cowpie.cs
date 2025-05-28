@@ -23,7 +23,7 @@ public partial class Cowpie : Area3D
     {
         if (Input.IsActionJustPressed("action_use") && _isColliding)
         {
-            if (_player.HasShovel && _player.IsUsingWheelbarrow && _player.GetWheelbarrowCurrentCowpie() < 5 && _player.GetWheelbarrowCurrentCowpie() != -1)
+            if (_player.HasShovel && _player.IsUsingWheelbarrow && _player.GetWheelbarrowCurrentCowpie() < 5 && _player.GetWheelbarrowCurrentWood() == 0)
             {
                 _player.AddWheelbarrowCowpie();
 

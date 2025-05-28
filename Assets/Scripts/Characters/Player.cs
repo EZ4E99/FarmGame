@@ -28,7 +28,6 @@ public partial class Player : CharacterBody3D
     // 节点引用
     private Node3D _playerModel;
     private AnimationPlayer _playerModelAnimationPlayer;
-    private Node3D _wheelbarrow;
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private RayCast3D _crosshairRaycast3D;
@@ -65,9 +64,6 @@ public partial class Player : CharacterBody3D
         _returnButton = GetNode<Button>("HUD/Menu/VBoxContainer/HBoxContainer/Button");
         _hotBar = GetNode<HotBar>("HUD/HotBar");
         _daysCount = GetNode<Label>("HUD/Label");
-
-        PackedScene WheelbarrowScene = GD.Load<PackedScene>("res://Assets/Scenes/Interactables/wheelbarrow.tscn");
-        _wheelbarrow = (Node3D)WheelbarrowScene.Instantiate();
 
         Callable OnButtonPressedCallable = new(this, MethodName.ToggleInventory);
     	_closeButton.Connect("pressed", OnButtonPressedCallable, 0); 
