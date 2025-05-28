@@ -33,7 +33,7 @@ public partial class CompostBox : Area3D
     {
         if (Input.IsActionJustPressed("action_use") && _isColliding)
         {
-            if (!IsComposting && _player.HasShovel && _player.IsUsingWheelbarrow && _player.WheelbarrowCurrentCowpie == 5)
+            if (!IsComposting && _player.HasShovel && _player.IsUsingWheelbarrow && _player.GetWheelbarrowCurrentCowpie() == 5)
             {
                 IsComposting = true;
                 _animationPlayer.Play("fill");

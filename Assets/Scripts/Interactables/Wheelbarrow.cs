@@ -4,36 +4,46 @@ using System;
 public partial class Wheelbarrow : Area3D
 {
     private bool _isColliding = false;
-    private bool HasWheelbarrow = true;
     private Label3D _label3D;
     private Player _player;
     private MeshInstance3D meshInstance3D;
     private StaticBody3D staticBody3D;
+    private Node3D _shovel;
+    private Label3D _currentWheelbarrowCount;
+    private AnimationPlayer _itemAnimationPlayer;
+
+    public int WheelbarrowCurrentCowpie = 0;
+    public int WheelbarrowCurrentWood = 0;
 
     public override void _Ready()
     {
         _label3D = GetNode<Label3D>("InteractPrompt");
         meshInstance3D = GetNode<MeshInstance3D>("Wheelbarrow");
         staticBody3D = GetNode<StaticBody3D>("StaticBody3D");
+        _shovel = GetNode<Node3D>("Wheelbarrow/shovel");
+        _currentWheelbarrowCount = GetNode<Label3D>("Wheelbarrow/Label3D");
+        _itemAnimationPlayer = GetNode<AnimationPlayer>("ItemAnimationPlayer");
 
         Callable bodyEnteredCallable = new(this, MethodName.OnBodyEntered);
-    	Connect("body_entered", bodyEnteredCallable, 0); 
-		Callable bodyExitedCallable = new(this, MethodName.OnBodyExited);
-    	Connect("body_exited", bodyExitedCallable, 0); 
+        Connect("body_entered", bodyEnteredCallable, 0);
+        Callable bodyExitedCallable = new(this, MethodName.OnBodyExited);
+        Connect("body_exited", bodyExitedCallable, 0);
 
         _player = (Player)GetTree().GetFirstNodeInGroup("player");
     }
 
     public async override void _PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustPressed("action_use") && _isColliding && _player.CurrentHoldWood == 0)
+        if (Input.IsActionJustPressed("action_use") && _isColliding && !(_player.CurrentPlayerState == Player.PlayerState.Idle_Holding || _player.CurrentPlayerState == Player.PlayerState.Run_Holding))
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            ChangeWheelbarrowVisibility(true);
+        }
 
-            if (HasWheelbarrow)
-                ChangeWheelbarrowVisibility(true);
-            else
-                ChangeWheelbarrowVisibility(false);
+        if (Input.IsActionJustPressed("action_use_alt") && _isColliding && !(_player.CurrentPlayerState == Player.PlayerState.Idle || _player.CurrentPlayerState == Player.PlayerState.Run))
+        {
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            ChangeWheelbarrowVisibility(false);
         }
         base._PhysicsProcess(delta);
     }
@@ -60,21 +70,54 @@ public partial class Wheelbarrow : Area3D
 
     public void ChangeWheelbarrowVisibility(bool visible)
     {
-        Player player = (Player)GetTree().GetFirstNodeInGroup("player");
-        if (player.WheelbarrowCurrentCowpie != 0) return;
-        player.UpdateWheelbarrow(visible);
+        _player.UpdateWheelbarrow(this, visible);
 
         if (visible)
         {
-            meshInstance3D.Hide();
+            UpdateShovel();
             staticBody3D.SetCollisionLayerValue(1, false);
         }
         else
         {
-            meshInstance3D.Show();
+            _shovel.Hide();
             staticBody3D.SetCollisionLayerValue(1, true);
         }
-        
-        HasWheelbarrow = !visible;
+    }
+
+    public void AddWheelbarrowCowpie()
+    {
+        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5 || WheelbarrowCurrentWood < 0) return;
+
+        WheelbarrowCurrentCowpie++;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _itemAnimationPlayer.Play("collect_cowpie_" + WheelbarrowCurrentCowpie);
+    }
+
+    public void AddWheelbarrowWood()
+    {
+        if (!_player.IsUsingWheelbarrow || WheelbarrowCurrentWood > 5 || WheelbarrowCurrentCowpie < 0) return;
+
+        WheelbarrowCurrentWood++;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
+        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood);
+    }
+
+    public void UpdateShovel()
+    {
+        _shovel.Visible = _player.HasShovel;
+    }
+
+    public void FillCompostBox()
+    {
+        WheelbarrowCurrentCowpie = 0;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
+        _itemAnimationPlayer.Play("fill_compost_box");
+    }
+
+    public void RemoveWheelbarrowWood()
+    {
+        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood, -1, -1, true);
+        WheelbarrowCurrentWood--;
+        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
     }
 }

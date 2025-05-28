@@ -54,7 +54,7 @@ public partial class WoodsStack : Area3D
 
     public void AddWood()
     {
-        if (!(_player.CurrentHoldWood == 0 || _player.WheelbarrowCurrentWood == 0)) return;
+        if (!(_player.CurrentHoldWood == 0 || _player.GetWheelbarrowCurrentWood() == 0) && _player.GetWheelbarrowCurrentWood() != -1) return;
 
         WoodCount++;
         Node3D Wood = GetNode<Node3D>("Meshes/MeshInstance3D" + WoodCount);
@@ -65,7 +65,7 @@ public partial class WoodsStack : Area3D
 
     public void RemoveWood()
     {
-        if (_player.CurrentHoldWood >= 2 || _player.WheelbarrowCurrentWood >= 5) return;
+        if ((_player.CurrentHoldWood >= 2 || _player.GetWheelbarrowCurrentWood() >= 5) && _player.GetWheelbarrowCurrentWood() != -1) return;
 
         Node3D Wood = GetNode<Node3D>("Meshes/MeshInstance3D" + WoodCount);
         Wood.Hide();

@@ -133,7 +133,7 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_xqahv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 7)
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="Node3D" parent="." groups=["environment"]]
 
 [node name="tree" parent="Environment" instance=ExtResource("2_134hl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
@@ -478,10 +478,16 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -6.1, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 8.7)
 
 [node name="Wheelbarrow" parent="Environment" instance=ExtResource("17_pbk16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, 0, 18.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.7, 0, 16.2)
 
 [node name="CompostBox" parent="Environment" instance=ExtResource("19_tcd74")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, -0.1, 19)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, -0.1, 18.3)
+
+[node name="CompostBox2" parent="Environment" instance=ExtResource("19_tcd74")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 9.4, -0.1, 18.3)
+
+[node name="CompostBox3" parent="Environment" instance=ExtResource("19_tcd74")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 7, -0.1, 19.6)
 
 [node name="Ground" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -2)

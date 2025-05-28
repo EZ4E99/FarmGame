@@ -23,17 +23,12 @@ public partial class Player : CharacterBody3D
     public PlayerState CurrentPlayerState = PlayerState.Idle;
     public bool IsUsingWheelbarrow = false;
     public bool HasShovel = false;
-    public int WheelbarrowCurrentCowpie = 0;
-    public int WheelbarrowCurrentWood = 0;
     public int CurrentHoldWood = 0;
 
     // 节点引用
     private Node3D _playerModel;
     private AnimationPlayer _playerModelAnimationPlayer;
-    private AnimationPlayer _itemAnimationPlayer;
     private Node3D _wheelbarrow;
-    private Node3D _shovel;
-    private Label3D _currentWheelbarrowCount;
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private RayCast3D _crosshairRaycast3D;
@@ -59,10 +54,6 @@ public partial class Player : CharacterBody3D
         
         _playerModel = GetNode<Node3D>("Character");
         _playerModelAnimationPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
-        _itemAnimationPlayer = GetNode<AnimationPlayer>("Character/Items/ItemAnimationPlayer");
-        _wheelbarrow = GetNode<Node3D>("Character/Items/Wheelbarrow");
-        _shovel = GetNode<Node3D>("Character/Items/Wheelbarrow/shovel");
-        _currentWheelbarrowCount = GetNode<Label3D>("Character/Items/Wheelbarrow/Label3D");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _crosshairRaycast3D = GetNode<RayCast3D>("CameraPivot/Camera3D/RayCast3D");
@@ -74,6 +65,9 @@ public partial class Player : CharacterBody3D
         _returnButton = GetNode<Button>("HUD/Menu/VBoxContainer/HBoxContainer/Button");
         _hotBar = GetNode<HotBar>("HUD/HotBar");
         _daysCount = GetNode<Label>("HUD/Label");
+
+        PackedScene WheelbarrowScene = GD.Load<PackedScene>("res://Assets/Scenes/Interactables/wheelbarrow.tscn");
+        _wheelbarrow = (Node3D)WheelbarrowScene.Instantiate();
 
         Callable OnButtonPressedCallable = new(this, MethodName.ToggleInventory);
     	_closeButton.Connect("pressed", OnButtonPressedCallable, 0); 
@@ -309,50 +303,87 @@ public partial class Player : CharacterBody3D
         CurrentHoldWood--;
     }
 
-    public void UpdateWheelbarrow(bool visible)
+    public void UpdateWheelbarrow(Wheelbarrow wheelbarrow, bool visible)
     {
         if ((CurrentPlayerState == PlayerState.Idle_Holding || CurrentPlayerState == PlayerState.Run_Holding) && CurrentHoldWood > 0) return;
 
-        _wheelbarrow.Visible = visible;
         IsUsingWheelbarrow = visible;
+
+        if (visible)
+        {
+            Node3D items = GetNode<Node3D>("Character/Items");
+            wheelbarrow.Reparent(items);
+            wheelbarrow.GlobalRotation = _playerModel.GlobalRotation; 
+            wheelbarrow.GlobalPosition = _playerModel.GlobalPosition;
+            wheelbarrow.Position += new Vector3(0, 0, -1);
+            wheelbarrow.AddToGroup("wheelbarrow");
+        }
+        else
+        {
+            Node3D environment = (Node3D)GetTree().GetFirstNodeInGroup("environment");
+            wheelbarrow.Reparent(environment);
+            wheelbarrow.RemoveFromGroup("wheelbarrow");
+        }
     }
 
-    public void AddWheelbarrowCowpie()
+    public Wheelbarrow GetWheelbarrow()
     {
-        if (!IsUsingWheelbarrow || WheelbarrowCurrentCowpie > 5 || WheelbarrowCurrentWood < 0) return;
+        if (!IsUsingWheelbarrow) return null;
 
-        WheelbarrowCurrentCowpie++;
-        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
-        _itemAnimationPlayer.Play("collect_cowpie_" + WheelbarrowCurrentCowpie);
+        return (Wheelbarrow)GetTree().GetFirstNodeInGroup("wheelbarrow");
     }
 
     public void AddWheelbarrowWood()
     {
-        if (!IsUsingWheelbarrow || WheelbarrowCurrentWood > 5 || WheelbarrowCurrentCowpie < 0) return;
+        if (GetWheelbarrow() == null) return;
 
-        WheelbarrowCurrentWood++;
-        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
-        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood);
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        wheelbarrow.AddWheelbarrowWood();
+    }
+
+    public void RemoveWheelbarrowWood()
+    {
+        if (GetWheelbarrow() == null) return;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        wheelbarrow.RemoveWheelbarrowWood();
+    }
+
+    public int GetWheelbarrowCurrentWood()
+    {
+        if (GetWheelbarrow() == null) return -1;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        return wheelbarrow.WheelbarrowCurrentWood;
+    }
+
+    public void AddWheelbarrowCowpie()
+    {
+        if (GetWheelbarrow() == null) return;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        wheelbarrow.AddWheelbarrowCowpie();
+    }
+
+    public void FillCompostBox()
+    {
+        if (GetWheelbarrow() == null) return;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        wheelbarrow.FillCompostBox();
+    }
+
+    public int GetWheelbarrowCurrentCowpie()
+    {
+        if (GetWheelbarrow() == null) return -1;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        return wheelbarrow.WheelbarrowCurrentCowpie;
     }
 
     public void UpdateShovel()
     {
         HasShovel = true;
-        _shovel.Show();
-    }
-
-    public void FillCompostBox()
-    {
-        WheelbarrowCurrentCowpie = 0;
-        _currentWheelbarrowCount.Text = WheelbarrowCurrentCowpie + "/5";
-        _itemAnimationPlayer.Play("fill_compost_box");
-    }
-
-    public void RemoveWheelbarrowWood()
-    {
-        _itemAnimationPlayer.Play("collect_wood_" + WheelbarrowCurrentWood, -1, -1, true);
-        WheelbarrowCurrentWood--;
-        _currentWheelbarrowCount.Text = WheelbarrowCurrentWood + "/5";
     }
 
     public void OnMenuCloseButtonPressed()
