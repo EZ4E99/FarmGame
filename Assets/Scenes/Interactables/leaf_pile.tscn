@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://b188l1qsgfv08"]
+
+[ext_resource type="Texture2D" uid="uid://cny66ielymk64" path="res://Assets/Textures/QQ20250531-015938.png" id="1_cgf6h"]
+[ext_resource type="Script" uid="uid://bu01mbujy3eln" path="res://Assets/Scripts/Interactables/LeafPile.cs" id="1_n30b6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n30b6"]
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dw5x"]
+albedo_texture = ExtResource("1_cgf6h")
+uv1_scale = Vector3(3, 3, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vm1dh"]
+material = SubResource("StandardMaterial3D_5dw5x")
+top_radius = 0.0
+height = 0.2
+radial_segments = 8
+
+[node name="LeafPile" type="Area3D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_n30b6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_n30b6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+mesh = SubResource("CylinderMesh_vm1dh")
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 收集 树叶
+需要 铲子、小推车"
+font_size = 36

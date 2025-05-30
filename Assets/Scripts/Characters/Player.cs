@@ -45,12 +45,14 @@ public partial class Player : CharacterBody3D
     private Vector2 _cameraRotation = Vector2.Zero;
     private int _currentDay = 1;
     public InventoryItem _currentSelectedItem;
+
+    public Node3D raycastCollider;
     
 
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
-        
+
         _playerModel = GetNode<Node3D>("Character");
         _playerModelAnimationPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
@@ -66,12 +68,12 @@ public partial class Player : CharacterBody3D
         _daysCount = GetNode<Label>("HUD/Label");
 
         Callable OnButtonPressedCallable = new(this, MethodName.ToggleInventory);
-    	_closeButton.Connect("pressed", OnButtonPressedCallable, 0); 
+        _closeButton.Connect("pressed", OnButtonPressedCallable, 0);
         Callable OnMenuCloseButtonPressedCallable = new(this, MethodName.OnMenuCloseButtonPressed);
-    	_menuCloseButton.Connect("pressed", OnMenuCloseButtonPressedCallable, 0); 
+        _menuCloseButton.Connect("pressed", OnMenuCloseButtonPressedCallable, 0);
         Callable OnReturnButtonPressedCallable = new(this, MethodName.OnReturnButtonPressed);
-    	_returnButton.Connect("pressed", OnReturnButtonPressedCallable, 0); 
-        
+        _returnButton.Connect("pressed", OnReturnButtonPressedCallable, 0);
+
         _gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     }
 
@@ -205,6 +207,7 @@ public partial class Player : CharacterBody3D
                 Raycast3DCollider.Call("OnBodyExited", this);
 
             Raycast3DCollider = newCollider;
+            raycastCollider = newCollider;
 
             if (IsInstanceValid(Raycast3DCollider))
                 Raycast3DCollider.Call("OnBodyEntered", this);
@@ -213,6 +216,7 @@ public partial class Player : CharacterBody3D
         {
             Raycast3DCollider.Call("OnBodyExited", this);
             Raycast3DCollider = null;
+            raycastCollider = null;
         }
     }
 
@@ -345,14 +349,6 @@ public partial class Player : CharacterBody3D
         wheelbarrow.RemoveWheelbarrowWood();
     }
 
-    public int GetWheelbarrowCurrentWood()
-    {
-        if (GetWheelbarrow() == null) return -1;
-
-        Wheelbarrow wheelbarrow = GetWheelbarrow();
-        return wheelbarrow.WheelbarrowCurrentWood;
-    }
-
     public void AddWheelbarrowCowpie()
     {
         if (GetWheelbarrow() == null) return;
@@ -369,12 +365,57 @@ public partial class Player : CharacterBody3D
         wheelbarrow.FillCompostBox();
     }
 
-    public int GetWheelbarrowCurrentCowpie()
+    public void AddWheelbarrowLeaf()
     {
-        if (GetWheelbarrow() == null) return -1;
+        if (GetWheelbarrow() == null) return;
 
         Wheelbarrow wheelbarrow = GetWheelbarrow();
-        return wheelbarrow.WheelbarrowCurrentCowpie;
+        wheelbarrow.AddWheelbarrowLeaf();
+    }
+
+    public void RemoveWheelbarrowLeaf()
+    {
+        if (GetWheelbarrow() == null) return;
+
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        wheelbarrow.RemoveWheelbarrowLeaf();
+    }
+
+    public bool CheckWheelbarrowIsEmpty()
+    {
+        Wheelbarrow wheelbarrow = GetWheelbarrow();
+        return wheelbarrow.IsWheelbarrowEmpty;
+    }
+
+    public bool CheckWheelbarrowContent(string name)
+    {
+        if (GetWheelbarrow() != null)
+        {
+            Wheelbarrow wheelbarrow = GetWheelbarrow();
+
+            switch (name)
+            {
+                case "WheelbarrowCurrentCowpie":
+                    if (wheelbarrow.WheelbarrowCurrentCowpie > 0)
+                        return true;
+                    else
+                        return false;
+                case "WheelbarrowCurrentWood":
+                    if (wheelbarrow.WheelbarrowCurrentWood > 0)
+                        return true;
+                    else
+                        return false;
+                case "WheelbarrowCurrentLeaf":
+                    if (wheelbarrow.WheelbarrowCurrentLeaf > 0)
+                        return true;
+                    else
+                        return false;
+                default:
+                    return false;
+            }
+        }
+        else
+            return false;
     }
 
     public void UpdateShovel()

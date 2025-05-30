@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://3opqcmu2sr3d"]
+[gd_scene load_steps=34 format=3 uid="uid://3opqcmu2sr3d"]
 
 [ext_resource type="Script" uid="uid://cy4eborwot04x" path="res://Assets/Scripts/Interactables/Wheelbarrow.cs" id="1_kh121"]
 [ext_resource type="ArrayMesh" uid="uid://dunf6pypmt3yn" path="res://Assets/Models/wheelbarrow.obj" id="1_uwe7k"]
 [ext_resource type="PackedScene" uid="uid://c5wytyx33usvk" path="res://Assets/Scenes/Environments/shovel.tscn" id="3_2rm7a"]
+[ext_resource type="Texture2D" uid="uid://cny66ielymk64" path="res://Assets/Textures/QQ20250531-015938.png" id="4_jdcc1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kh121"]
 albedo_color = Color(0.629675, 0.629675, 0.629675, 1)
@@ -44,6 +45,17 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.7
 radial_segments = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6dgb"]
+albedo_texture = ExtResource("4_jdcc1")
+uv1_scale = Vector3(3, 3, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uewtv"]
+material = SubResource("StandardMaterial3D_c6dgb")
+height = 0.2
+radial_segments = 8
+rings = 4
+is_hemisphere = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwe7k"]
 size = Vector3(0.8, 0.6, 1.2)
@@ -132,6 +144,18 @@ tracks/6/path = NodePath("Wheelbarrow/Wood5:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Wheelbarrow/Leaf:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -338,6 +362,46 @@ tracks/2/keys = {
 "values": [Vector3(0.01, 0.01, 0.01), Vector3(20, 20, 20)]
 }
 
+[sub_resource type="Animation" id="Animation_jdcc1"]
+resource_name = "collect_leaf"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Wheelbarrow/shovel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.5, 0.8, 1.1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-11.2467, 25.6006, -14.1472), Vector3(-16.968, 33.484, -16.465), Vector3(-30.317, 5.996, -21.872), Vector3(-15.061, 34.325, -15.692), Vector3(-11.2467, 25.6006, -14.1472), Vector3(-11.2467, 25.6006, -14.1472)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Wheelbarrow/shovel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.366667, 0.5, 0.9, 1.06667, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.206056, -1.15022, -0.235072), Vector3(-0.205949, -1.67377, -1.01229), Vector3(-0.205949, -1.67377, -0.29147), Vector3(-1.03673, -1.56032, -0.279253), Vector3(-0.205976, -1.54294, -0.277376), Vector3(-0.206003, -1.40676, -0.262707)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Wheelbarrow/Leaf:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.833333, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(24.38, 30, 36.92)]
+}
+
 [sub_resource type="Animation" id="Animation_idr7h"]
 resource_name = "collect_wood_1"
 length = 0.4
@@ -514,6 +578,7 @@ _data = {
 &"collect_cowpie_3": SubResource("Animation_1kofg"),
 &"collect_cowpie_4": SubResource("Animation_gayio"),
 &"collect_cowpie_5": SubResource("Animation_w6her"),
+&"collect_leaf": SubResource("Animation_jdcc1"),
 &"collect_wood_1": SubResource("Animation_idr7h"),
 &"collect_wood_2": SubResource("Animation_g6kmv"),
 &"collect_wood_3": SubResource("Animation_awexu"),
@@ -584,6 +649,10 @@ skeleton = NodePath("../../..")
 transform = Transform3D(-4.37114e-10, -0.01, 4.37114e-10, 0, -4.37114e-10, -0.01, 0.01, -4.37114e-10, 1.91069e-17, -2.5, 22.4873, 2.61865)
 mesh = SubResource("CylinderMesh_c2o51")
 skeleton = NodePath("../../..")
+
+[node name="Leaf" type="MeshInstance3D" parent="Wheelbarrow"]
+transform = Transform3D(0.01, -1.27898e-16, 1.36424e-15, 1.27898e-16, 0.01, -1.66893e-09, -1.36424e-15, 1.66893e-09, 0.01, -2.076, 17.301, 0.417)
+mesh = SubResource("SphereMesh_uewtv")
 
 [node name="Label3D" type="Label3D" parent="Wheelbarrow"]
 transform = Transform3D(1, 2.66454e-15, 5.68434e-14, 5.32907e-15, 1, -4.47035e-08, -1.42109e-14, 4.47035e-08, 1, -20, 19.9239, -1.74311)

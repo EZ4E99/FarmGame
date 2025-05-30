@@ -43,7 +43,7 @@ public partial class Furnace : Area3D
             }
             else
             {
-                if (_player.GetWheelbarrowCurrentWood() > 0 && !_woods.Visible)
+                if (_player.CheckWheelbarrowContent("WheelbarrowCurrentWood") && !_woods.Visible)
                 {
                     _woods.Show();
                     _player.RemoveWheelbarrowWood();

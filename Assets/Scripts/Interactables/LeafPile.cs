@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Cowpie : Area3D
+public partial class LeafPile : Area3D
 {
     private bool _isColliding = false;
     private Label3D _label3D;
@@ -23,9 +23,9 @@ public partial class Cowpie : Area3D
     {
         if (Input.IsActionJustPressed("action_use") && _isColliding)
         {
-            if (_player.HasShovel && _player.IsUsingWheelbarrow && (_player.CheckWheelbarrowContent("WheelbarrowCurrentCowpie") || _player.CheckWheelbarrowIsEmpty()))
+            if (_player.HasShovel && _player.IsUsingWheelbarrow && (_player.CheckWheelbarrowContent("WheelbarrowCurrentLeaf") || _player.CheckWheelbarrowIsEmpty()))
             {
-                _player.AddWheelbarrowCowpie();
+                _player.AddWheelbarrowLeaf();
 
                 await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
                 QueueFree(); // 销毁物品（在本帧结束时）

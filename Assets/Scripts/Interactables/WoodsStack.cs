@@ -6,7 +6,6 @@ public partial class WoodsStack : Area3D
     private bool _isColliding = false;
     private Label3D _label3D;
     private Player _player;
-    private Item Wood;
 
     private int WoodCount = 21;
 
@@ -20,7 +19,6 @@ public partial class WoodsStack : Area3D
         Connect("body_exited", bodyExitedCallable, 0);
 
         _player = (Player)GetTree().GetFirstNodeInGroup("player");
-        Wood = (Item)GD.Load<PackedScene>("res://Assets/Scenes/Items/item_wood.tscn").Instantiate();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -58,7 +56,7 @@ public partial class WoodsStack : Area3D
 
         if (_player.IsUsingWheelbarrow)
         {
-            if (_player.GetWheelbarrowCurrentWood() == 0 || _player.GetWheelbarrowCurrentCowpie() != 0)
+            if (!_player.CheckWheelbarrowContent("WheelbarrowCurrentWood") && !_player.CheckWheelbarrowIsEmpty())
                 return;
         }
         else
@@ -76,7 +74,7 @@ public partial class WoodsStack : Area3D
     {
         if (_player.IsUsingWheelbarrow)
         {
-            if (_player.GetWheelbarrowCurrentWood() >= 5 || _player.GetWheelbarrowCurrentCowpie() != 0)
+            if (_player.CheckWheelbarrowContent("WheelbarrowCurrentWood") || _player.CheckWheelbarrowIsEmpty())
                 return;
         }
         else
