@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class InventorySlot : Control
@@ -108,6 +109,59 @@ public partial class InventorySlot : Control
             }
         }
     }
+
+    public void TryAutoAssignToHotKey(InventorySlot pickedSlot)
+    {
+        // 获取所有 inventory slots
+        Array<Node> slots = pickedSlot.GetTree().GetNodesInGroup("inventory_slots");
+        HashSet<int> usedHotKeys = [];
+
+        // 检查是否已有相同物品绑定（避免重复）
+        foreach (InventorySlot slot in slots.Cast<InventorySlot>())
+        {
+            if (slot.HasHotKey)
+            {
+                usedHotKeys.Add(slot.AlignedHotKey);
+
+                // 如果已有相同物品绑定，直接退出
+                if (slot.Item == pickedSlot.Item)
+                    return;
+            }
+        }
+
+        // 寻找第一个未占用的快捷键位
+        for (int i = 1; i <= 10; i++)
+        {
+            if (i == 10)
+            {
+                if (!usedHotKeys.Contains(0))
+                {
+                    // 绑定快捷键
+                    pickedSlot.HasHotKey = true;
+                    pickedSlot.AlignedHotKey = 0;
+                    pickedSlot._hotKey.Text = "0";
+                    pickedSlot._hotKey.Show();
+                    
+                    _hotBar.UpdateHotBar(0, pickedSlot.Item);
+                    return;
+                }
+            }
+            else if (!usedHotKeys.Contains(i))
+            {
+                // 绑定快捷键
+                pickedSlot.HasHotKey = true;
+                pickedSlot.AlignedHotKey = i;
+                pickedSlot._hotKey.Text = i.ToString();
+                pickedSlot._hotKey.Show();
+
+                _hotBar.UpdateHotBar(i, pickedSlot.Item);
+                return;
+            }
+        }
+
+        // 所有快捷键已占用，或没有可用的
+    }
+
 
     // 鼠标事件处理
     private void OnTextureButtonMouseEntered()

@@ -28,6 +28,7 @@ public partial class Player : CharacterBody3D
     // 节点引用
     private Node3D _playerModel;
     private AnimationPlayer _playerModelAnimationPlayer;
+    private Sprite3D _currentItem; //当前角色手持的物品（缺乏模型暂时用Sprite3D作为占位符）
     private Node3D _cameraPivot;
     private Camera3D _camera;
     private RayCast3D _crosshairRaycast3D;
@@ -47,7 +48,7 @@ public partial class Player : CharacterBody3D
     public InventoryItem _currentSelectedItem;
 
     public Node3D raycastCollider;
-    
+
 
     public override void _Ready()
     {
@@ -55,6 +56,7 @@ public partial class Player : CharacterBody3D
 
         _playerModel = GetNode<Node3D>("Character");
         _playerModelAnimationPlayer = GetNode<AnimationPlayer>("Character/AnimationPlayer");
+        _currentItem = GetNode<Sprite3D>("Character/Items/CurrentItem/Sprite3D");
         _cameraPivot = GetNode<Node3D>("CameraPivot");
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _crosshairRaycast3D = GetNode<RayCast3D>("CameraPivot/Camera3D/RayCast3D");
@@ -145,6 +147,11 @@ public partial class Player : CharacterBody3D
                 else
                     _currentSelectedItem = _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem + 1);
             }
+
+                    if (_currentSelectedItem == null)
+                        _currentItem.Texture = null;
+                    else
+                        _currentItem.Texture = _currentSelectedItem.Sprite.Texture;
         }
 
 
@@ -293,6 +300,8 @@ public partial class Player : CharacterBody3D
         CurrentHoldWood++;
         Node3D Wood = GetNode<Node3D>("Character/Items/Woods/Wood" + CurrentHoldWood);
         Wood.Show();
+
+        _currentItem.Hide();
     }
 
     public void RemoveHoldingWood()
@@ -301,6 +310,9 @@ public partial class Player : CharacterBody3D
         Node3D Wood = GetNode<Node3D>("Character/Items/Woods/Wood" + CurrentHoldWood);
         Wood.Hide();
         CurrentHoldWood--;
+
+        if (CurrentHoldWood == 0)
+            _currentItem.Show();
     }
 
     public void UpdateWheelbarrow(Wheelbarrow wheelbarrow, bool visible)
@@ -308,12 +320,13 @@ public partial class Player : CharacterBody3D
         if ((CurrentPlayerState == PlayerState.Idle_Holding || CurrentPlayerState == PlayerState.Run_Holding) && CurrentHoldWood > 0) return;
 
         IsUsingWheelbarrow = visible;
+        _currentItem.Visible = !visible;
 
         if (visible)
         {
             Node3D items = GetNode<Node3D>("Character/Items");
             wheelbarrow.Reparent(items);
-            wheelbarrow.GlobalRotation = _playerModel.GlobalRotation; 
+            wheelbarrow.GlobalRotation = _playerModel.GlobalRotation;
             wheelbarrow.GlobalPosition = _playerModel.GlobalPosition;
             wheelbarrow.Position += new Vector3(0, 0, -1);
             wheelbarrow.AddToGroup("wheelbarrow");

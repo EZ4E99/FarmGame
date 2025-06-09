@@ -17,11 +17,10 @@ public partial class HotBarSlot : CenterContainer
         player = (Player)GetTree().GetFirstNodeInGroup("player");
     }
 
-    public void UpdateSlot(InventoryItem item)
+    public async void UpdateSlot(InventoryItem itemin)
     {
-        if (item == null)
+        if (itemin == null)
         {
-            sprite2D.Texture = null;
             // 隐藏图标和文本
             sprite2D.Hide();
             label.Hide();
@@ -33,16 +32,20 @@ public partial class HotBarSlot : CenterContainer
         else
         {
             // 确保其他情况下图标和文本可见
-            sprite2D.Show();
+
             label.Show();
 
-            if (item.Amount > 1)
-                label.Text = item.Amount.ToString();
-            else if (item.Amount == 1)
+            if (itemin.Amount > 1)
+                label.Text = itemin.Amount.ToString();
+            else if (itemin.Amount == 1)
                 label.Text = "1";
 
-            sprite2D.Texture = item.Sprite.Texture;
-            this.item = item;
+            this.item = itemin;
+
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+            sprite2D.Texture = itemin.Sprite.Texture;
+            sprite2D.Show();
         }
 
         // 更新位置

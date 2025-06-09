@@ -101,6 +101,7 @@ public partial class Inventory : Control
             {
                 if (slot.Item != null && slot.Item.ItemName == _item.ItemName) // 找到相同物品
                 {
+                    slot.TryAutoAssignToHotKey(slot);
                     slot.Item.Amount += _item.Amount;
                     return;
                 }
@@ -114,6 +115,7 @@ public partial class Inventory : Control
             {
                 slot.Item = _item;
                 slot.UpdateSlot(); // 更新槽位
+                slot.TryAutoAssignToHotKey(slot);
                 return;
             }
         }

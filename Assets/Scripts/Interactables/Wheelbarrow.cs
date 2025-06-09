@@ -36,13 +36,13 @@ public partial class Wheelbarrow : Area3D
 
     public async override void _PhysicsProcess(double delta)
     {
+        base._PhysicsProcess(delta);
         if (Input.IsActionJustPressed("action_use") && _isColliding && !_player.IsUsingWheelbarrow && !(_player.CurrentPlayerState == Player.PlayerState.Idle_Holding || _player.CurrentPlayerState == Player.PlayerState.Run_Holding))
         {
             await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
             ChangeWheelbarrowVisibility(true);
         }
-
-        if (Input.IsActionJustPressed("action_use_alt") && _isColliding && _player.IsUsingWheelbarrow && !(_player.CurrentPlayerState == Player.PlayerState.Idle || _player.CurrentPlayerState == Player.PlayerState.Run))
+        else if (Input.IsActionJustPressed("action_use_alt") && _isColliding && _player.IsUsingWheelbarrow && !(_player.CurrentPlayerState == Player.PlayerState.Idle || _player.CurrentPlayerState == Player.PlayerState.Run))
         {
             if (_player.raycastCollider != null && _player.raycastCollider == _player.GetWheelbarrow())
             {
@@ -51,7 +51,7 @@ public partial class Wheelbarrow : Area3D
                 ChangeWheelbarrowVisibility(false);
             }
         }
-        base._PhysicsProcess(delta);
+        else return;
     }
 
     public void OnBodyEntered(Node3D body)
