@@ -76,12 +76,12 @@ public partial class Inventory : Control
     {
         if (which.Item != null)
         {
-            Tooltip.SetText(Tr(which.HintItem.ItemName));
+            Tooltip.SetText(which.Item.ItemName);
             Tooltip.Visible = isHovering;
         }
         else if (which.HintItem != null)
         {
-            Tooltip.SetText(Tr(which.HintItem.ItemName));
+            Tooltip.SetText(which.HintItem.ItemName);
             Tooltip.Visible = isHovering;
         }
     }
