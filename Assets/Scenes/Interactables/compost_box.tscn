@@ -5,22 +5,22 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_fmg1f"]
 size = Vector3(3.2, 2, 2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u12ah"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sb0q1"]
 albedo_color = Color(0.376471, 0.266667, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cjvvr"]
-material = SubResource("StandardMaterial3D_u12ah")
+material = SubResource("StandardMaterial3D_sb0q1")
 size = Vector3(2, 1, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ssqq"]
-material = SubResource("StandardMaterial3D_u12ah")
+material = SubResource("StandardMaterial3D_sb0q1")
 size = Vector3(0.1, 1, 0.9)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssgdu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amqh0"]
 albedo_color = Color(0.366349, 0.279438, 1.44392e-07, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_sb0q1"]
-material = SubResource("StandardMaterial3D_ssgdu")
+material = SubResource("StandardMaterial3D_amqh0")
 size = Vector2(2, 0.7)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mse30"]
@@ -37,18 +37,18 @@ radial_segments = 8
 rings = 7
 is_hemisphere = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmg1f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6w02"]
 albedo_color = Color(0.384314, 0.243137, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_u12ah"]
-material = SubResource("StandardMaterial3D_fmg1f")
+material = SubResource("StandardMaterial3D_v6w02")
 size = Vector3(2.25, 0.1, 0.95)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjvvr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ibod"]
 albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3ssqq"]
-material = SubResource("StandardMaterial3D_cjvvr")
+material = SubResource("StandardMaterial3D_1ibod")
 top_radius = 0.05
 bottom_radius = 0.05
 height = 0.2

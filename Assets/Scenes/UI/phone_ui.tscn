@@ -1,0 +1,572 @@
+[gd_scene load_steps=36 format=3 uid="uid://datixkwndoyx1"]
+
+[ext_resource type="Script" uid="uid://c0gk55ynosvsa" path="res://Assets/Scripts/Phone/Phone.cs" id="1_7o248"]
+[ext_resource type="Texture2D" uid="uid://dfmyybxo2ef5u" path="res://Assets/Textures/todolist.png" id="1_qjp8c"]
+[ext_resource type="Texture2D" uid="uid://cw7fgfmcfy3t6" path="res://Assets/Textures/store.png" id="2_k6uwh"]
+[ext_resource type="Texture2D" uid="uid://p26vc42v5pto" path="res://Assets/Textures/phone_status.png" id="3_k6uwh"]
+[ext_resource type="PackedScene" uid="uid://da3lovblt5ys6" path="res://Assets/Scenes/UI/mission_slot.tscn" id="4_aaiys"]
+[ext_resource type="PackedScene" uid="uid://43kw361xwwq4" path="res://Assets/Scenes/Items/item_wheat_seed.tscn" id="5_t3a6c"]
+[ext_resource type="PackedScene" uid="uid://n1lqsl0wux2d" path="res://Assets/Scenes/Items/item_sickle.tscn" id="6_u6bhs"]
+[ext_resource type="PackedScene" uid="uid://2rmi2y8xxvgp" path="res://Assets/Scenes/Items/item_flour.tscn" id="7_gajp7"]
+[ext_resource type="PackedScene" uid="uid://cawhdm7kofvjb" path="res://Assets/Scenes/Items/item_dough.tscn" id="8_dd175"]
+[ext_resource type="PackedScene" uid="uid://ckh2asrqcl0r2" path="res://Assets/Scenes/Items/item_bread.tscn" id="9_u6bhs"]
+[ext_resource type="Script" uid="uid://bb4hspuwa80m1" path="res://Assets/Scripts/Phone/StoreItem.cs" id="11_gajp7"]
+[ext_resource type="PackedScene" uid="uid://xj5c8ubw6kr8" path="res://Assets/Scenes/Items/item_fertilizer.tscn" id="11_u6bhs"]
+[ext_resource type="PackedScene" uid="uid://bh1k1u6ecwej1" path="res://Assets/Scenes/Items/item_yeast.tscn" id="12_gajp7"]
+[ext_resource type="PackedScene" uid="uid://c6etrrwho1kb" path="res://Assets/Scenes/Items/item_bucket.tscn" id="13_dd175"]
+[ext_resource type="PackedScene" uid="uid://ckqvl6s6ct408" path="res://Assets/Scenes/Items/item_salt.tscn" id="14_etred"]
+[ext_resource type="PackedScene" uid="uid://du28c77dbchjl" path="res://Assets/Scenes/Items/item_shovel.tscn" id="15_5644m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3qgbe"]
+bg_color = Color(0.125911, 0.125911, 0.125911, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[sub_resource type="Gradient" id="Gradient_k6uwh"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1, 0.533333, 0.566667)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.784314, 1, 0.342841, 0.79047, 4.1585e-05, 1, 0.784314, 1, 0.705882, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 30
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ksx1f"]
+gradient = SubResource("Gradient_k6uwh")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tcnig"]
+texture = SubResource("GradientTexture2D_ksx1f")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ksx1f"]
+font_size = 24
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_ksx1f"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0.784314, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 30
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tcnig"]
+gradient = SubResource("Gradient_ksx1f")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ekt8q"]
+texture = SubResource("GradientTexture2D_tcnig")
+
+[sub_resource type="LabelSettings" id="LabelSettings_k6uwh"]
+font_size = 36
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksx1f"]
+bg_color = Color(0.252028, 0.252028, 0.252028, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Gradient" id="Gradient_623qy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.1)
+colors = PackedColorArray(1, 1, 1, 1, 0.784314, 1, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 30
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cayaf"]
+gradient = SubResource("Gradient_623qy")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p04up"]
+texture = SubResource("GradientTexture2D_cayaf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6bhs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gajp7"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcnig"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_qjp8c"]
+offsets = PackedFloat32Array(0.2, 0.65, 0.85, 0.95, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.20871, 0.20871, 0.20871, 1, 0.165656, 0.165656, 0.165656, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k6uwh"]
+gradient = SubResource("Gradient_qjp8c")
+width = 40
+height = 40
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_623qy"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_color = Color(0.136826, 0.136826, 0.136826, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+
+[node name="PhoneUI" type="CanvasLayer"]
+
+[node name="Phone" type="Panel" parent="." groups=["phone"]]
+visible = false
+custom_minimum_size = Vector2(545, 480)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -272.5
+offset_top = -565.0
+offset_right = 272.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3qgbe")
+script = ExtResource("1_7o248")
+
+[node name="Pages" type="Control" parent="Phone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Home" type="Panel" parent="Phone/Pages"]
+texture_filter = 5
+custom_minimum_size = Vector2(525, 555)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -262.5
+offset_top = -555.0
+offset_right = 262.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_tcnig")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Phone/Pages/Home"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -182.5
+offset_right = 153.0
+offset_bottom = -16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="TodoList" type="VBoxContainer" parent="Phone/Pages/Home/HBoxContainer"]
+layout_mode = 2
+
+[node name="TodoListIcon" type="TextureButton" parent="Phone/Pages/Home/HBoxContainer/TodoList"]
+layout_mode = 2
+texture_normal = ExtResource("1_qjp8c")
+stretch_mode = 3
+
+[node name="TodoListName" type="Label" parent="Phone/Pages/Home/HBoxContainer/TodoList"]
+layout_mode = 2
+text = "备忘录"
+label_settings = SubResource("LabelSettings_ksx1f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Store" type="VBoxContainer" parent="Phone/Pages/Home/HBoxContainer"]
+layout_mode = 2
+
+[node name="StoreIcon" type="TextureButton" parent="Phone/Pages/Home/HBoxContainer/Store"]
+layout_mode = 2
+texture_normal = ExtResource("2_k6uwh")
+
+[node name="StoreName" type="Label" parent="Phone/Pages/Home/HBoxContainer/Store"]
+layout_mode = 2
+text = "商店"
+label_settings = SubResource("LabelSettings_ksx1f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Status" type="Label" parent="Phone/Pages/Home"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = 72.5
+offset_right = 47.0
+offset_bottom = 180.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "资金存余：￥1000000
+碳汇贡献：10000
+社会价值：10000"
+label_settings = SubResource("LabelSettings_ksx1f")
+
+[node name="TodoList" type="Panel" parent="Phone/Pages"]
+visible = false
+texture_filter = 5
+custom_minimum_size = Vector2(525, 555)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -262.5
+offset_top = -555.0
+offset_right = 262.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ekt8q")
+
+[node name="Title" type="Label" parent="Phone/Pages/TodoList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -207.5
+offset_right = 54.0
+offset_bottom = -157.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "备忘录"
+label_settings = SubResource("LabelSettings_k6uwh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="ScrollContainer" parent="Phone/Pages/TodoList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ksx1f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Phone/Pages/TodoList/Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MissionSlot" parent="Phone/Pages/TodoList/Panel/VBoxContainer" instance=ExtResource("4_aaiys")]
+layout_mode = 2
+
+[node name="Mission" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot" index="0" node_paths=PackedStringArray("CollectMissionItem")]
+CollectMissionItem = NodePath("../Item_WheatSeed")
+
+[node name="Item_WheatSeed" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot" instance=ExtResource("5_t3a6c")]
+visible = false
+
+[node name="MissionSlot2" parent="Phone/Pages/TodoList/Panel/VBoxContainer" instance=ExtResource("4_aaiys")]
+layout_mode = 2
+text = "收集1个镰刀"
+
+[node name="Mission" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot2" index="0" node_paths=PackedStringArray("CollectMissionItem")]
+MissionName = "收集1个镰刀"
+CollectMissionItem = NodePath("../Item_Sickle")
+CollectMissionItemNeedCount = 1
+
+[node name="Item_Sickle" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot2" instance=ExtResource("6_u6bhs")]
+visible = false
+
+[node name="MissionSlot3" parent="Phone/Pages/TodoList/Panel/VBoxContainer" instance=ExtResource("4_aaiys")]
+layout_mode = 2
+text = "收集1个面粉"
+
+[node name="Mission" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot3" index="0" node_paths=PackedStringArray("CollectMissionItem")]
+MissionName = "收集1个面粉"
+CollectMissionItem = NodePath("../Item_Flour")
+CollectMissionItemNeedCount = 1
+
+[node name="Item_Flour" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot3" instance=ExtResource("7_gajp7")]
+visible = false
+
+[node name="MissionSlot4" parent="Phone/Pages/TodoList/Panel/VBoxContainer" instance=ExtResource("4_aaiys")]
+layout_mode = 2
+text = "收集1个面团"
+
+[node name="Mission" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot4" index="0" node_paths=PackedStringArray("CollectMissionItem")]
+MissionName = "收集1个面团"
+CollectMissionItem = NodePath("../Item_Dough")
+CollectMissionItemNeedCount = 1
+
+[node name="Item_Dough" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot4" instance=ExtResource("8_dd175")]
+visible = false
+
+[node name="MissionSlot5" parent="Phone/Pages/TodoList/Panel/VBoxContainer" instance=ExtResource("4_aaiys")]
+layout_mode = 2
+text = "收集1个面包"
+
+[node name="Mission" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot5" index="0" node_paths=PackedStringArray("CollectMissionItem")]
+MissionName = "收集1个面包"
+CollectMissionItem = NodePath("../Item_Bread")
+CollectMissionItemNeedCount = 1
+
+[node name="Item_Bread" parent="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot5" instance=ExtResource("9_u6bhs")]
+visible = false
+
+[node name="BackButton" type="Button" parent="Phone/Pages/TodoList"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 75.0
+offset_right = 91.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 24
+text = "< 返回"
+
+[node name="Store" type="Panel" parent="Phone/Pages"]
+visible = false
+texture_filter = 5
+custom_minimum_size = Vector2(525, 555)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -262.5
+offset_top = -555.0
+offset_right = 262.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p04up")
+
+[node name="Title" type="Label" parent="Phone/Pages/Store"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -207.5
+offset_right = 54.0
+offset_bottom = -157.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "商店"
+label_settings = SubResource("LabelSettings_k6uwh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="ScrollContainer" parent="Phone/Pages/Store"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ksx1f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Phone/Pages/Store/Panel"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyCount" type="Label" parent="Phone/Pages/Store/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_u6bhs")
+text = "资金存余：￥"
+label_settings = SubResource("LabelSettings_gajp7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StoreItem1" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Fertilizer")
+ItemAmount = 5
+Price = 100
+
+[node name="Item_Fertilizer" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem1" instance=ExtResource("11_u6bhs")]
+visible = false
+
+[node name="StoreItem2" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Yeast")
+ItemAmount = 5
+Price = 100
+
+[node name="Item_Yeast" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem2" instance=ExtResource("12_gajp7")]
+visible = false
+
+[node name="StoreItem3" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Bucket")
+ItemAmount = 1
+Price = 50
+
+[node name="Item_Bucket" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem3" instance=ExtResource("13_dd175")]
+visible = false
+
+[node name="StoreItem4" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Salt")
+ItemAmount = 5
+Price = 100
+
+[node name="Item_Salt" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem4" instance=ExtResource("14_etred")]
+visible = false
+
+[node name="StoreItem5" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Sickle")
+ItemAmount = 1
+Price = 75
+
+[node name="Item_Sickle" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem5" instance=ExtResource("6_u6bhs")]
+visible = false
+
+[node name="StoreItem6" type="Button" parent="Phone/Pages/Store/Panel/VBoxContainer" node_paths=PackedStringArray("Item")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+alignment = 0
+script = ExtResource("11_gajp7")
+Item = NodePath("Item_Shovel")
+ItemAmount = 1
+Price = 80
+
+[node name="Item_Shovel" parent="Phone/Pages/Store/Panel/VBoxContainer/StoreItem6" instance=ExtResource("15_5644m")]
+visible = false
+
+[node name="BackButton" type="Button" parent="Phone/Pages/Store"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 75.0
+offset_right = 91.0
+offset_bottom = 117.0
+theme_override_font_sizes/font_size = 24
+text = "< 返回"
+
+[node name="UI" type="Control" parent="Phone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DayCount" type="Label" parent="Phone/UI"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 112.0
+offset_bottom = 59.0
+text = "DAY - 1"
+label_settings = SubResource("LabelSettings_tcnig")
+
+[node name="Decorations" type="Control" parent="Phone"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FrontCamera" type="TextureRect" parent="Phone/Decorations"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 232.5
+offset_top = 20.0
+offset_right = 272.5
+offset_bottom = 60.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture2D_k6uwh")
+
+[node name="PhoneStatus" type="TextureRect" parent="Phone/Decorations"]
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 379.0
+offset_top = 20.0
+offset_right = 475.0
+offset_bottom = 68.0
+grow_horizontal = 0
+texture = ExtResource("3_k6uwh")
+
+[node name="Edge" type="Panel" parent="Phone/Decorations"]
+custom_minimum_size = Vector2(545, 480)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 525.0
+offset_bottom = 525.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_623qy")
+
+[node name="CloseButton" type="Button" parent="Phone"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -58.0
+offset_right = 28.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "关闭"
+
+[editable path="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot"]
+[editable path="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot2"]
+[editable path="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot3"]
+[editable path="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot4"]
+[editable path="Phone/Pages/TodoList/Panel/VBoxContainer/MissionSlot5"]

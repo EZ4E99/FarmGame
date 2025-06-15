@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpllw01au2jbd"]
+
+[ext_resource type="Texture2D" uid="uid://cgmq5nd2ix0ek" path="res://Assets/Textures/Fertilizer.png" id="1_bdgue"]
+
+[node name="StoreItem1" type="Button"]
+theme_override_font_sizes/font_size = 24
+text = "肥料 x5 - ￥100"
+icon = ExtResource("1_bdgue")

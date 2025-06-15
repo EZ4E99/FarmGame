@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3fk6yd8os065"]
+
+[ext_resource type="Script" uid="uid://c2iajp28qfaxt" path="res://Assets/Scripts/Interactables/PackageDeliveryBox.cs" id="1_xl025"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xc2r1"]
+size = Vector3(3.2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u12ah"]
+albedo_color = Color(0.376471, 0.266667, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xl025"]
+material = SubResource("StandardMaterial3D_u12ah")
+size = Vector3(2, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jawkd"]
+material = SubResource("StandardMaterial3D_u12ah")
+size = Vector3(0.1, 1, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssgdu"]
+albedo_color = Color(0.366349, 0.279438, 1.44392e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ocsvg"]
+material = SubResource("StandardMaterial3D_ssgdu")
+size = Vector2(2, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmg1f"]
+albedo_color = Color(0.384314, 0.243137, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p5xha"]
+material = SubResource("StandardMaterial3D_fmg1f")
+size = Vector3(2.25, 0.1, 0.95)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjvvr"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2sgw7"]
+material = SubResource("StandardMaterial3D_cjvvr")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+radial_segments = 8
+rings = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r13q4"]
+size = Vector3(2.2, 1.1, 0.9)
+
+[node name="PackageDeliveryBox" type="Area3D" groups=["package_delivery_box"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_xl025")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 1, 0)
+shape = SubResource("BoxShape3D_xc2r1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.4)
+mesh = SubResource("BoxMesh_xl025")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.4)
+mesh = SubResource("BoxMesh_xl025")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05, 0.5, 0)
+mesh = SubResource("BoxMesh_jawkd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05, 0.5, 0)
+mesh = SubResource("BoxMesh_jawkd")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("PlaneMesh_ocsvg")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.45)
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, -0.45)
+mesh = SubResource("BoxMesh_p5xha")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 0.8, 0, 0)
+mesh = SubResource("CylinderMesh_2sgw7")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 4.37114e-08, 1, -0.8, 0, 0)
+mesh = SubResource("CylinderMesh_2sgw7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98023e-08, 0.55, 0)
+shape = SubResource("BoxShape3D_r13q4")
+
+[node name="InteractPrompt" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+pixel_size = 0.002
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 1
+text = "[E] 获取物品"
+font_size = 36
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.6, -0.451)
+shaded = true
+texture_filter = 4
+modulate = Color(0.355314, 0.355314, 0.355314, 1)
+text = "物品箱
+"

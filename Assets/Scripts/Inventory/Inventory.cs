@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 using System.Collections.Generic;
 
@@ -75,12 +76,12 @@ public partial class Inventory : Control
     {
         if (which.Item != null)
         {
-            Tooltip.SetText(which.Item.ItemName);
+            Tooltip.SetText(Tr(which.HintItem.ItemName));
             Tooltip.Visible = isHovering;
         }
         else if (which.HintItem != null)
         {
-            Tooltip.SetText(which.HintItem.ItemName);
+            Tooltip.SetText(Tr(which.HintItem.ItemName));
             Tooltip.Visible = isHovering;
         }
     }
@@ -93,6 +94,8 @@ public partial class Inventory : Control
     {
         var _item = (InventoryItem)_inventoryItemScene.Instantiate(); // 创建物品副本
         _item.Initialize(item.ItemName, item.Icon, item.IsStackable, amount, item.ItemType);
+
+        CheckIsMissionItem(item);
 
         // 如果物品是堆叠型的，寻找合适的槽位进行堆叠
         if (item.IsStackable)
@@ -117,6 +120,22 @@ public partial class Inventory : Control
                 slot.UpdateSlot(); // 更新槽位
                 slot.TryAutoAssignToHotKey(slot);
                 return;
+            }
+        }
+    }
+
+    // 检查是否为任务中的物品
+    public async void CheckIsMissionItem(Item item)
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        Array<Node> missionSlots = GetTree().GetNodesInGroup("mission_slots");
+        GD.Print(missionSlots.Count);
+        foreach (MissionSlot missionSlot in missionSlots)
+        {
+            if (item.ItemName == missionSlot.Mission.CollectMissionItem.ItemName)
+            {
+                missionSlot.Mission.CheckCollectMissionFinished();
+                missionSlot.UpdateButtonStatus();
             }
         }
     }
@@ -166,6 +185,7 @@ public partial class Inventory : Control
         }
         return items;
     }
+    
 
     // 非销毁性（只读函数）获取指定类型的所有物品
     public List<Item> All(string name)
@@ -179,6 +199,20 @@ public partial class Inventory : Control
             }
         }
         return items;
+    }
+
+        // 非销毁性（只读函数）获取指定类型的物品的数量
+    public int CountAll(string name)
+    {
+        int count = 0;
+        foreach (var slot in Slots)
+        {
+            if (slot.Item != null && slot.Item.ItemName == name)
+            {
+                count += slot.Item.Amount;
+            }
+        }
+        return count;
     }
 
     // 销毁性（移除所有指定类型的物品）

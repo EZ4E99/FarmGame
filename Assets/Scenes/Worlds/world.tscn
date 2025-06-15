@@ -1,14 +1,11 @@
-[gd_scene load_steps=48 format=3 uid="uid://e4vy55asewd3"]
+[gd_scene load_steps=52 format=3 uid="uid://e4vy55asewd3"]
 
 [ext_resource type="PackedScene" uid="uid://jt6sr7y7vovf" path="res://Assets/Scenes/Characters/player.tscn" id="1_xqahv"]
 [ext_resource type="PackedScene" uid="uid://dxhvb6weqkijy" path="res://Assets/Scenes/Environments/tree.tscn" id="2_134hl"]
-[ext_resource type="PackedScene" uid="uid://dw1vthxs6pwgq" path="res://Assets/Scenes/Items/PickupItems/yeast.tscn" id="2_k5uew"]
-[ext_resource type="PackedScene" uid="uid://bg6l12toerbak" path="res://Assets/Scenes/Items/PickupItems/sickle.tscn" id="3_hjdkr"]
-[ext_resource type="PackedScene" uid="uid://by5lj6wyxjxuw" path="res://Assets/Scenes/Items/PickupItems/bucket.tscn" id="4_jgur7"]
-[ext_resource type="PackedScene" uid="uid://d284yms4ajv26" path="res://Assets/Scenes/Items/PickupItems/shovel.tscn" id="5_38b56"]
-[ext_resource type="PackedScene" uid="uid://cf2s8tiwtbops" path="res://Assets/Scenes/Items/PickupItems/salt.tscn" id="5_pbk16"]
+[ext_resource type="PackedScene" uid="uid://dqxxs2iicudqg" path="res://Assets/Scenes/Environments/terrain.tscn" id="2_lad1g"]
 [ext_resource type="PackedScene" uid="uid://qmu1xbau648w" path="res://Assets/Scenes/Items/PickupItems/wheat_seed.tscn" id="6_0vdfb"]
 [ext_resource type="PackedScene" uid="uid://bf51hidu6l3ag" path="res://Assets/Scenes/Interactables/mud.tscn" id="7_ge0or"]
+[ext_resource type="PackedScene" uid="uid://474a10aecr0k" path="res://Assets/Scenes/Environments/package_delivery.tscn" id="7_r30t5"]
 [ext_resource type="PackedScene" uid="uid://dpcp780y0ryti" path="res://Assets/Scenes/Interactables/stone_mill.tscn" id="8_134hl"]
 [ext_resource type="PackedScene" uid="uid://c15milsb4xwgi" path="res://Assets/Scenes/Environments/fences.tscn" id="8_k5uew"]
 [ext_resource type="PackedScene" uid="uid://bi6p6oao18kfp" path="res://Assets/Scenes/Environments/fences_end.tscn" id="9_jgur7"]
@@ -23,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bpw5587ikvd7h" path="res://Assets/Scenes/Interactables/compost_box.tscn" id="19_tcd74"]
 [ext_resource type="PackedScene" uid="uid://d3kuu6epe7ao1" path="res://Assets/Scenes/Interactables/cowpie.tscn" id="21_tcd74"]
 [ext_resource type="PackedScene" uid="uid://b188l1qsgfv08" path="res://Assets/Scenes/Interactables/leaf_pile.tscn" id="23_qbsw3"]
+[ext_resource type="PackedScene" uid="uid://d3fk6yd8os065" path="res://Assets/Scenes/Interactables/package_delivery_box.tscn" id="26_mu50f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_top_color = Color(0.647059, 1, 1, 1)
@@ -117,10 +115,30 @@ albedo_color = Color(0.47451, 0.305882, 0.235294, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_tlwt5"]
 material = SubResource("StandardMaterial3D_fj7yv")
-size = Vector2(50, 50)
+size = Vector2(30, 50)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pbk16"]
-data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0, -25, 25, 0, -25)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_mu50f"]
+data = PackedVector3Array(15, 0, 25, -15, 0, 25, 15, 0, -25, -15, 0, 25, -15, 0, -25, 15, 0, -25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lad1g"]
+albedo_color = Color(0.47451, 0.305882, 0.235294, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r30t5"]
+material = SubResource("StandardMaterial3D_lad1g")
+size = Vector2(20, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hdoen"]
+data = PackedVector3Array(10, 0, 25, -10, 0, 25, 10, 0, -25, -10, 0, 25, -10, 0, -25, 10, 0, -25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mu50f"]
+albedo_color = Color(0.288518, 0.288518, 0.288518, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hdoen"]
+material = SubResource("StandardMaterial3D_mu50f")
+size = Vector2(10, 50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_chptj"]
+data = PackedVector3Array(5, 0, 25, -5, 0, 25, 5, 0, -25, -5, 0, 25, -5, 0, -25, 5, 0, -25)
 
 [node name="World" type="Node3D"]
 
@@ -136,11 +154,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 7)
 
 [node name="Environment" type="Node3D" parent="." groups=["environment"]]
 
+[node name="Terrain" parent="Environment" instance=ExtResource("2_lad1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -570, -18, 415)
+
 [node name="tree" parent="Environment" instance=ExtResource("2_134hl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 11)
 
 [node name="tree2" parent="Environment" instance=ExtResource("2_134hl")]
 transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, 12, 0, 11)
+
+[node name="tree7" parent="Environment" instance=ExtResource("2_134hl")]
+transform = Transform3D(2.98023e-07, 0, 1, 0, 1, 0, -1, 0, 2.98023e-07, 12, 0, 21)
+
+[node name="tree8" parent="Environment" instance=ExtResource("2_134hl")]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 13, 0, -13)
 
 [node name="tree3" parent="Environment" instance=ExtResource("2_134hl")]
 transform = Transform3D(-1, 0, 5.96046e-08, 0, 1, 0, -5.96046e-08, 0, -1, 7, 0, -13)
@@ -153,71 +180,6 @@ transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, -9, 0, -2)
 
 [node name="tree6" parent="Environment" instance=ExtResource("2_134hl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -2)
-
-[node name="Yeast" parent="Environment" instance=ExtResource("2_k5uew")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 3.5)
-
-[node name="Sickle" parent="Environment" instance=ExtResource("3_hjdkr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5)
-
-[node name="Shovel" parent="Environment" instance=ExtResource("5_38b56")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.6, -1.5)
-
-[node name="Bucket" parent="Environment" instance=ExtResource("4_jgur7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.5, -1.5)
-
-[node name="Salt" parent="Environment" instance=ExtResource("5_pbk16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 2)
-
-[node name="WheatSeed" parent="Environment" instance=ExtResource("6_0vdfb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 3)
-
-[node name="WheatSeed2" parent="Environment" instance=ExtResource("6_0vdfb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 2)
-
-[node name="WheatSeed3" parent="Environment" instance=ExtResource("6_0vdfb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
-
-[node name="WheatSeed4" parent="Environment" instance=ExtResource("6_0vdfb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
-
-[node name="Muds" type="Node3D" parent="Environment"]
-
-[node name="Mud" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, -5)
-
-[node name="Mud2" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -5)
-
-[node name="Mud3" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.1, -5)
-
-[node name="Mud4" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, -5)
-
-[node name="Mud5" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, -5)
-
-[node name="Mud6" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, -5)
-
-[node name="Mud7" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, -8)
-
-[node name="Mud8" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -8)
-
-[node name="Mud9" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.1, -8)
-
-[node name="Mud10" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, -8)
-
-[node name="Mud11" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, -8)
-
-[node name="Mud12" parent="Environment/Muds" instance=ExtResource("7_ge0or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, -8)
 
 [node name="Fences" type="Node3D" parent="Environment"]
 
@@ -308,8 +270,80 @@ visible = false
 [node name="Fences51" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
 transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, -4, 0.4, 14)
 
-[node name="Fences44" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
-transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 10, 0.4, 14)
+[node name="Fences45" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, 0, -2.62268e-07, 0, -1, 11, 0.4, 13)
+
+[node name="Fences60" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, 0, -2.62268e-07, 0, -1, 13, 0.4, 17)
+
+[node name="Fences61" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, 0, -2.62268e-07, 0, -1, 13, 0.4, 13)
+
+[node name="Fences62" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, 0, -2.62268e-07, 0, -1, 15, 0.4, 17)
+
+[node name="Fences63" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-1, 0, 2.62268e-07, 0, 1, 0, -2.62268e-07, 0, -1, 15, 0.4, 13)
+
+[node name="Fences64" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 18)
+
+[node name="Fences65" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 12)
+
+[node name="Fences67" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 10)
+
+[node name="Fences72" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 8)
+
+[node name="Fences73" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 6)
+
+[node name="Fences74" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 4)
+
+[node name="Fences75" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 2)
+
+[node name="Fences76" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, 0)
+
+[node name="Fences77" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -2)
+
+[node name="Fences78" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -4)
+
+[node name="Fences79" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -6)
+
+[node name="Fences80" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -8)
+
+[node name="Fences81" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -10)
+
+[node name="Fences82" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -12)
+
+[node name="Fences83" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(-2.18557e-07, 0, -1, 0, 1, 0, 1, 0, -2.18557e-07, 16, 0.4, -14)
+
+[node name="Fences66" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 20)
+
+[node name="Fences68" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 22)
+
+[node name="Fences69" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 24)
+
+[node name="Fences70" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 26)
+
+[node name="Fences71" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
+transform = Transform3D(3.0598e-07, 0, 1, 0, 1, 0, -1, 0, 3.0598e-07, 16, 0.4, 28)
 
 [node name="Fences35" parent="Environment/Fences" instance=ExtResource("8_k5uew")]
 transform = Transform3D(1.31135e-07, 0, 1, 0, 1, 0, -1, 0, 1.31135e-07, 10, 0.4, 12)
@@ -380,19 +414,19 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0.4
 [node name="Fences53" parent="Environment/Fences" instance=ExtResource("9_jgur7")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0.4, 16)
 
-[node name="Fences54" parent="Environment/Fences" instance=ExtResource("9_jgur7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 0.4, 16)
+[node name="Fences55" parent="Environment/Fences" instance=ExtResource("9_jgur7")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 11, 0.4, 17)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Fences"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.9, -3)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 1.9, 17)
 mesh = SubResource("CylinderMesh_pbk16")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment/Fences"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.9, -3)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 1.9, 13)
 mesh = SubResource("CylinderMesh_pbk16")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment/Fences"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, -3)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 3, 15)
 mesh = SubResource("BoxMesh_ge0or")
 
 [node name="Label3D" type="Label3D" parent="Environment/Fences/MeshInstance3D3"]
@@ -460,99 +494,177 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.8, -1.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.2, 0)
 shape = SubResource("ConcavePolygonShape3D_ot7nn")
 
-[node name="StoneMill" parent="Environment" instance=ExtResource("8_134hl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
-
-[node name="Table" parent="Environment" instance=ExtResource("9_tcd74")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0.1, 0.8)
-
-[node name="Well" parent="Environment" instance=ExtResource("10_38b56")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.4, 0.2, -1.4)
-
-[node name="Bed" parent="Environment" instance=ExtResource("11_qbsw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.9, 0, 7.2)
-
-[node name="Furnace" parent="Environment" instance=ExtResource("12_lad1g")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -6.1, 0.4, 3.6)
-
-[node name="WoodsStack" parent="Environment" instance=ExtResource("13_r30t5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 8.7)
-
-[node name="Wheelbarrow" parent="Environment" instance=ExtResource("17_pbk16")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.7, 0, -1.8)
-
-[node name="Wheelbarrow2" parent="Environment" instance=ExtResource("17_pbk16")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.2, 0, -1.8)
-
-[node name="CompostBox" parent="Environment" instance=ExtResource("19_tcd74")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, -0.1, 18.3)
-
-[node name="CompostBox2" parent="Environment" instance=ExtResource("19_tcd74")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 9.4, -0.1, 18.3)
-
-[node name="CompostBox3" parent="Environment" instance=ExtResource("19_tcd74")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 7, -0.1, 19.6)
+[node name="PackageDelivery" parent="Environment" instance=ExtResource("7_r30t5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 31, -0.1, 15)
 
 [node name="Ground" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, 6)
 mesh = SubResource("PlaneMesh_tlwt5")
 skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/Ground"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_pbk16")
+shape = SubResource("ConcavePolygonShape3D_mu50f")
 
-[node name="cow" parent="." instance=ExtResource("18_0vdfb")]
+[node name="Ground2" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, -0.1, 6)
+mesh = SubResource("PlaneMesh_r30t5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Ground2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_hdoen")
+
+[node name="Ground3" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, -0.1, 6)
+mesh = SubResource("PlaneMesh_hdoen")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Ground3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_chptj")
+
+[node name="cow" parent="Environment" instance=ExtResource("18_0vdfb")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -2, 0.3, 15)
 
-[node name="cow2" parent="." instance=ExtResource("18_0vdfb")]
+[node name="cow2" parent="Environment" instance=ExtResource("18_0vdfb")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2, 0.3, 11)
 
-[node name="cow3" parent="." instance=ExtResource("18_0vdfb")]
+[node name="cow3" parent="Environment" instance=ExtResource("18_0vdfb")]
 transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -2, 0.3, 13)
 
-[node name="Cowpie" parent="." instance=ExtResource("21_tcd74")]
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="WheatSeed" parent="Interactables" instance=ExtResource("6_0vdfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 3)
+
+[node name="WheatSeed2" parent="Interactables" instance=ExtResource("6_0vdfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 2)
+
+[node name="WheatSeed3" parent="Interactables" instance=ExtResource("6_0vdfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 2)
+
+[node name="WheatSeed4" parent="Interactables" instance=ExtResource("6_0vdfb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 3)
+
+[node name="Muds" type="Node3D" parent="Interactables"]
+
+[node name="Mud" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, -5)
+
+[node name="Mud2" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -5)
+
+[node name="Mud3" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.1, -5)
+
+[node name="Mud4" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, -5)
+
+[node name="Mud5" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, -5)
+
+[node name="Mud6" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, -5)
+
+[node name="Mud7" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.1, -8)
+
+[node name="Mud8" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.1, -8)
+
+[node name="Mud9" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.1, -8)
+
+[node name="Mud10" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.1, -8)
+
+[node name="Mud11" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -0.1, -8)
+
+[node name="Mud12" parent="Interactables/Muds" instance=ExtResource("7_ge0or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.1, -8)
+
+[node name="StoneMill" parent="Interactables" instance=ExtResource("8_134hl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="Table" parent="Interactables" instance=ExtResource("9_tcd74")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0.1, 0.8)
+
+[node name="Well" parent="Interactables" instance=ExtResource("10_38b56")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.4, 0.2, -1.4)
+
+[node name="Bed" parent="Interactables" instance=ExtResource("11_qbsw3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.9, 0, 7.2)
+
+[node name="Furnace" parent="Interactables" instance=ExtResource("12_lad1g")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -6.1, 0.4, 3.6)
+
+[node name="WoodsStack" parent="Interactables" instance=ExtResource("13_r30t5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 8.7)
+
+[node name="Wheelbarrow" parent="Interactables" instance=ExtResource("17_pbk16")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4.7, 0, -1.8)
+
+[node name="Wheelbarrow2" parent="Interactables" instance=ExtResource("17_pbk16")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.2, 0, -1.8)
+
+[node name="CompostBox" parent="Interactables" instance=ExtResource("19_tcd74")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.6, -0.1, 18.3)
+
+[node name="CompostBox2" parent="Interactables" instance=ExtResource("19_tcd74")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 9.4, -0.1, 18.3)
+
+[node name="CompostBox3" parent="Interactables" instance=ExtResource("19_tcd74")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 7, -0.1, 19.6)
+
+[node name="Cowpie" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 10)
 
-[node name="Cowpie2" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie2" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.1, 11.7)
 
-[node name="Cowpie10" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie10" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, -0.1, 10.7)
 
-[node name="Cowpie3" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie3" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, -0.1, 12.1)
 
-[node name="Cowpie4" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie4" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.1, 13.3)
 
-[node name="Cowpie5" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie5" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.1, 15.5)
 
-[node name="Cowpie6" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie6" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, -0.1, 14.5)
 
-[node name="Cowpie7" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie7" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.1, 15.3)
 
-[node name="Cowpie8" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie8" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7, -0.1, 13.7)
 
-[node name="Cowpie9" parent="." instance=ExtResource("21_tcd74")]
+[node name="Cowpie9" parent="Interactables" instance=ExtResource("21_tcd74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1, -0.1, 10.3)
 
-[node name="LeafPile" parent="." instance=ExtResource("23_qbsw3")]
+[node name="LeafPile" parent="Interactables" instance=ExtResource("23_qbsw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.1, 9)
 
-[node name="LeafPile2" parent="." instance=ExtResource("23_qbsw3")]
+[node name="LeafPile2" parent="Interactables" instance=ExtResource("23_qbsw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.1, 8)
+
+[node name="LeafPile3" parent="Interactables" instance=ExtResource("23_qbsw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.1, 11)
 
-[node name="LeafPile3" parent="." instance=ExtResource("23_qbsw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.1, 13)
+[node name="LeafPile4" parent="Interactables" instance=ExtResource("23_qbsw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.1, 10)
 
-[node name="LeafPile4" parent="." instance=ExtResource("23_qbsw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.1, 15)
+[node name="PackageDeliveryBox" parent="Interactables" instance=ExtResource("26_mu50f")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 33.5, 0.4, 15)
 
 [editable path="Environment/Fences/Fences36"]
 [editable path="Environment/Fences/Fences59"]

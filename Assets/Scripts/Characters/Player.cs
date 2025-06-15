@@ -34,17 +34,21 @@ public partial class Player : CharacterBody3D
     private RayCast3D _crosshairRaycast3D;
     private Node3D Raycast3DCollider = null;
     private CanvasLayer _inventoryUI;
+    private Phone _phoneUI;
     private TextureRect _crosshair;
-    private Button _closeButton;
+    private Button _inventoryCloseButton;
+    private Button _phoneCloseButton;
     private Panel _menu;
     private Button _menuCloseButton;
     private Button _returnButton;
     private HotBar _hotBar;
     private Label _daysCount;
+    private VBoxContainer _missionSlots;
 
     private float _gravity;
     private Vector2 _cameraRotation = Vector2.Zero;
-    private int _currentDay = 1;
+    public int _currentDay = 1;
+    public int _currentMoney = 1000;
     public InventoryItem _currentSelectedItem;
 
     public Node3D raycastCollider;
@@ -61,16 +65,21 @@ public partial class Player : CharacterBody3D
         _camera = GetNode<Camera3D>("CameraPivot/Camera3D");
         _crosshairRaycast3D = GetNode<RayCast3D>("CameraPivot/Camera3D/RayCast3D");
         _inventoryUI = GetNode<CanvasLayer>("HUD/InventoryUI");
+        _phoneUI = GetNode<Phone>("HUD/PhoneUI/Phone");
         _crosshair = GetNode<TextureRect>("HUD/Crosshair");
-        _closeButton = GetNode<Button>("HUD/InventoryUI/Panel/CloseButton");
+        _inventoryCloseButton = GetNode<Button>("HUD/InventoryUI/Panel/CloseButton");
+        _phoneCloseButton = GetNode<Button>("HUD/PhoneUI/Phone/CloseButton");
         _menu = GetNode<Panel>("HUD/Menu");
         _menuCloseButton = GetNode<Button>("HUD/Menu/VBoxContainer/HBoxContainer/Button2");
         _returnButton = GetNode<Button>("HUD/Menu/VBoxContainer/HBoxContainer/Button");
         _hotBar = GetNode<HotBar>("HUD/HotBar");
-        _daysCount = GetNode<Label>("HUD/Label");
+        _daysCount = GetNode<Label>("HUD/DaysCount");
+        _missionSlots = GetNode<VBoxContainer>("HUD/MissionContainer");
 
-        Callable OnButtonPressedCallable = new(this, MethodName.ToggleInventory);
-        _closeButton.Connect("pressed", OnButtonPressedCallable, 0);
+        Callable OnInventoryCloseButtonPressedCallable = new(this, MethodName.ToggleInventory);
+        _inventoryCloseButton.Connect("pressed", OnInventoryCloseButtonPressedCallable, 0);
+        Callable OnPhoneCloseButtonPressedCallable = new(this, MethodName.TogglePhone);
+        _phoneCloseButton.Connect("pressed", OnPhoneCloseButtonPressedCallable, 0);
         Callable OnMenuCloseButtonPressedCallable = new(this, MethodName.OnMenuCloseButtonPressed);
         _menuCloseButton.Connect("pressed", OnMenuCloseButtonPressedCallable, 0);
         Callable OnReturnButtonPressedCallable = new(this, MethodName.OnReturnButtonPressed);
@@ -116,6 +125,9 @@ public partial class Player : CharacterBody3D
 
         if (Input.IsActionJustPressed("action_inventory_toggle"))
             ToggleInventory();
+
+        if (Input.IsActionJustPressed("action_phone_toggle"))
+            TogglePhone();
 
         if (Input.IsActionJustPressed("debug_add_day"))
             Sleep();
@@ -253,6 +265,34 @@ public partial class Player : CharacterBody3D
         }
     }
 
+    public void TogglePhone()
+    {
+        _phoneUI.Visible = !_phoneUI.Visible;
+
+        if (_phoneUI.Visible)
+        {
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+            _inventoryUI.Hide();
+            _hotBar.Hide();
+            _crosshair.Hide();
+            _daysCount.Hide();
+
+            _phoneUI.UpdateDayCount();
+        }
+        else
+        {
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+            _hotBar.Show();
+            _crosshair.Show();
+            _daysCount.Show();
+            _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem);
+            if (_hotBar.HotBarSelect(_hotBar.CurrentSelectedItem) != null)
+            {
+                _currentSelectedItem = _hotBar.HotBarSelect(_hotBar.CurrentSelectedItem);
+            }
+        }
+    }
+
     public void Sleep()
     {
         _currentDay++;
@@ -266,6 +306,9 @@ public partial class Player : CharacterBody3D
 
         CompostBox compostBox = (CompostBox)GetTree().GetFirstNodeInGroup("compost_box");
         compostBox.Compost();
+
+        PackageDeliveryBox packageDeliveryBox = (PackageDeliveryBox)GetTree().GetFirstNodeInGroup("package_delivery_box");
+        packageDeliveryBox.Deliver();
     }
 
     public void ToggleMenu()
@@ -434,6 +477,32 @@ public partial class Player : CharacterBody3D
     public void UpdateShovel()
     {
         HasShovel = true;
+    }
+
+    public void UpdateMissionSlots(MissionSlot mission, bool activated)
+    {
+        if (activated)
+        {
+            Label newLabel = new() { Text = mission.Text };
+            LabelSettings labelSettings = new(){FontSize = 24, OutlineSize = 10, OutlineColor = new Color(0,0,0,1)};
+            newLabel.LabelSettings = labelSettings;
+
+            _missionSlots.AddChild(newLabel);
+        }
+        else
+        {
+            Array<Node> labels = _missionSlots.GetChildren();
+            if (labels.Count == 0) return;
+
+            foreach (Label label in labels.Cast<Label>())
+            {
+                if (label.Text == mission.Text)
+                {
+                    label.QueueFree();
+                    return;
+                }
+            }
+        }
     }
 
     public void OnMenuCloseButtonPressed()

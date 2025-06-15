@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://da3lovblt5ys6"]
+
+[ext_resource type="Script" uid="uid://c8yg8r0tdybhp" path="res://Assets/Scripts/Phone/MissionSlot.cs" id="1_d6q6x"]
+[ext_resource type="Script" uid="uid://co27cbjgrvf14" path="res://Assets/Scripts/Phone/Mission.cs" id="2_rxgyf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxgyf"]
+bg_color = Color(0.6, 0.6, 0.6, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="MissionSlot" type="CheckBox"]
+custom_minimum_size = Vector2(0, 50)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rxgyf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rxgyf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rxgyf")
+script = ExtResource("1_d6q6x")
+
+[node name="Mission" type="Node" parent="." node_paths=PackedStringArray("CollectMissionItem") groups=["mission"]]
+script = ExtResource("2_rxgyf")
+MissionID = "1"
+MissionName = "收集5个小麦种子"
+CollectMissionItem = NodePath("")
+CollectMissionItemNeedCount = 5
